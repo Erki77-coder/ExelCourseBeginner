@@ -1,954 +1,2360 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-<meta charset="UTF-8">
-<title>Курс «Excel с нуля»</title>
-<style>
-  body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.5; margin: 2cm 2.5cm; color: #000; }
-  h1 { font-size: 20pt; text-align: center; margin-top: 40px; margin-bottom: 20px; page-break-before: always; }
-  h1:first-of-type { page-break-before: avoid; }
-  h2 { font-size: 15pt; margin-top: 25px; margin-bottom: 10px; border-bottom: 1px solid #999; padding-bottom: 3px; }
-  h3 { font-size: 13pt; margin-top: 18px; margin-bottom: 8px; }
-  .title-page { text-align: center; margin-top: 120px; }
-  .title-page h1 { font-size: 26pt; page-break-before: avoid; border: none; }
-  .title-page .subtitle { font-size: 16pt; margin: 20px 0; }
-  .title-page .meta { font-size: 12pt; margin-top: 60px; }
-  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 11pt; }
-  th, td { border: 1px solid #666; padding: 6px 8px; text-align: left; vertical-align: top; }
-  th { background: #e8e8e8; font-weight: bold; }
-  code { font-family: Consolas, "Courier New", monospace; background: #f2f2f2; padding: 1px 4px; border-radius: 3px; font-size: 10.5pt; }
-  .note { background: #fff8dc; border-left: 4px solid #daa520; padding: 8px 12px; margin: 12px 0; }
-  .task { background: #eef4fb; border-left: 4px solid #2a6ebb; padding: 8px 12px; margin: 12px 0; }
-  .task.new { border-left-color: #7b2fbe; background: #f5f0ff; }
-  .answer { border-bottom: 1px solid #000; display: inline-block; min-width: 250px; height: 1em; }
-  ul, ol { margin: 8px 0 8px 24px; }
-  li { margin-bottom: 4px; }
-  .toc { margin-top: 30px; }
-  .toc li { margin-bottom: 6px; }
-  details.check { background: #eef7ee; border-left: 4px solid #2e8b57; padding: 8px 12px; margin: 12px 0; border-radius: 4px; }
-  details.check summary { cursor: pointer; font-weight: bold; color: #1f6b3a; list-style: none; user-select: none; }
-  details.check summary::-webkit-details-marker { display: none; }
-  details.check summary::before { content: "▶ "; font-size: 10pt; display: inline-block; }
-  details.check[open] summary::before { content: "▼ "; }
-  details.check summary:hover { color: #145228; text-decoration: underline; }
-  details.check .content { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #2e8b57; }
-  .topbar { position: sticky; top: 0; background: #fff; padding: 10px; border-bottom: 2px solid #2a6ebb; z-index: 100; display: flex; gap: 8px; flex-wrap: wrap; }
-  .topbar button { padding: 6px 12px; border: 1px solid #2a6ebb; background: #eef4fb; color: #1a4a8a; border-radius: 4px; cursor: pointer; font-size: 11pt; }
-  .topbar button:hover { background: #2a6ebb; color: #fff; }
-  .steps { background: #f5f0ff; border-left: 4px solid #7b2fbe; padding: 8px 12px; margin: 12px 0; }
-  .steps strong { color: #5a1f8a; }
-  .trap { background: #fdecec; border-left: 4px solid #c0392b; padding: 8px 12px; margin: 12px 0; }
-  .trap strong { color: #a93226; }
-  .prof { background: #eef9f1; border-left: 4px solid #27ae60; padding: 8px 12px; margin: 12px 0; }
-  .figure-placeholder { border: 2px dashed #aaa; padding: 20px; text-align: center; color: #777; background: #fafafa; margin: 12px 0; }
-  .input-row { margin: 6px 0; }
-  .input-row input { padding: 4px 8px; border: 1px solid #999; border-radius: 3px; width: 200px; font-size: 11pt; }
-  .input-row button { padding: 4px 10px; border: 1px solid #2a6ebb; background: #eef4fb; color: #1a4a8a; border-radius: 3px; cursor: pointer; margin-left: 6px; }
-  .input-row button:hover { background: #2a6ebb; color: #fff; }
-  .result { font-weight: bold; margin-left: 6px; }
-  .ok { color: green; }
-  .fail { color: #c0392b; }
-  .quiz-q { margin: 12px 0; }
-  .quiz-q label { display: block; margin-left: 20px; }
-  .one-page { font-size: 10pt; }
-  .one-page table { font-size: 10pt; }
-  .one-page th, .one-page td { padding: 4px 6px; }
+  <meta charset="UTF-8">
+  <title>Курс «Excel с нуля»</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* Плавающие кнопки и панели */
-  .floating-btn {
-    position: fixed;
-    bottom: 20px;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-  }
-  .floating-btn:hover { transform: scale(1.1); }
-  
-  .btn-hotkeys { right: 20px; background: #2a6ebb; color: #fff; }
-  .btn-hotkeys:hover { background: #1a4a8a; }
-  
-  .btn-cheatsheet { left: 20px; background: #daa520; color: #fff; }
-  .btn-cheatsheet:hover { background: #b8860b; }
+    /* Плавная прокрутка */
+    body {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 12pt;
+      line-height: 1.5;
+      margin: 2cm 2.5cm;
+      color: #000;
+    }
 
-  .floating-panel {
-    position: fixed;
-    bottom: 90px;
-    width: 360px;
-    max-height: 70vh;
-    overflow-y: auto;
-    background: #fff;
-    border: 2px solid #2a6ebb;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    padding: 12px 16px;
-    z-index: 1000;
-    display: none;
-  }
-  .floating-panel.open { display: block; }
-  
-  #hotkeysPanel { right: 20px; border-color: #2a6ebb; }
-  #cheatsheetPanel { left: 20px; border-color: #daa520; width: 400px; }
-  
-  .floating-panel h3 {
-    margin-top: 0;
-    font-size: 13pt;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 6px;
-  }
-  #hotkeysPanel h3 { color: #1a4a8a; }
-  #cheatsheetPanel h3 { color: #8b6508; }
+    h1 {
+      font-size: 20pt;
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      page-break-before: always;
+    }
 
-  .floating-panel table { font-size: 10.5pt; margin: 6px 0; }
-  .floating-panel th, .floating-panel td { padding: 4px 6px; }
-  
-  .floating-panel .close-btn {
-    float: right;
-    background: none;
-    border: none;
-    font-size: 16pt;
-    cursor: pointer;
-    color: #666;
-    line-height: 1;
-  }
-  .floating-panel .close-btn:hover { color: #c0392b; }
+    h1:first-of-type {
+      page-break-before: avoid;
+    }
 
-  @media print {
-    .topbar, .floating-btn, .floating-panel { display: none !important; }
-    details.check:not([open]) .content { display: none; }
-    .no-print { display: none; }
-    body { margin: 1cm; }
-  }
-</style>
+    h2 {
+      font-size: 15pt;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #999;
+      padding-bottom: 3px;
+    }
+
+    h3 {
+      font-size: 13pt;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+
+    .title-page {
+      text-align: center;
+      margin-top: 120px;
+    }
+
+    .title-page h1 {
+      font-size: 26pt;
+      page-break-before: avoid;
+      border: none;
+    }
+
+    .title-page .subtitle {
+      font-size: 16pt;
+      margin: 20px 0;
+    }
+
+    .title-page .meta {
+      font-size: 12pt;
+      margin-top: 60px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 12px 0;
+      font-size: 11pt;
+    }
+
+    th,
+    td {
+      border: 1px solid #666;
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #e8e8e8;
+      font-weight: bold;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #f2f2f2;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-size: 10.5pt;
+    }
+
+    .note {
+      background: #fff8dc;
+      border-left: 4px solid #daa520;
+      padding: 8px 12px;
+      margin: 12px 0;
+    }
+
+    .task {
+      background: #eef4fb;
+      border-left: 4px solid #2a6ebb;
+      padding: 8px 12px;
+      margin: 12px 0;
+    }
+
+    .task.new {
+      border-left-color: #7b2fbe;
+      background: #f5f0ff;
+    }
+
+    .answer {
+      border-bottom: 1px solid #000;
+      display: inline-block;
+      min-width: 250px;
+      height: 1em;
+    }
+
+    ul,
+    ol {
+      margin: 8px 0 8px 24px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    .toc {
+      margin-top: 30px;
+    }
+
+    .toc li {
+      margin-bottom: 6px;
+    }
+
+    .toc a {
+      color: #1a4a8a;
+      text-decoration: none;
+      border-bottom: 1px dashed #1a4a8a;
+    }
+
+    .toc a:hover {
+      color: #c0392b;
+      border-bottom-color: #c0392b;
+    }
+
+    details.check {
+      background: #eef7ee;
+      border-left: 4px solid #2e8b57;
+      padding: 8px 12px;
+      margin: 12px 0;
+      border-radius: 4px;
+    }
+
+    details.check summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: #1f6b3a;
+      list-style: none;
+      user-select: none;
+    }
+
+    details.check summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.check summary::before {
+      content: "▶ ";
+      font-size: 10pt;
+      display: inline-block;
+    }
+
+    details.check[open] summary::before {
+      content: "▼ ";
+    }
+
+    details.check summary:hover {
+      color: #145228;
+      text-decoration: underline;
+    }
+
+    details.check .content {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed #2e8b57;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      padding: 10px;
+      border-bottom: 2px solid #2a6ebb;
+      z-index: 100;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .topbar button {
+      padding: 6px 12px;
+      border: 1px solid #2a6ebb;
+      background: #eef4fb;
+      color: #1a4a8a;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11pt;
+    }
+
+    .topbar button:hover {
+      background: #2a6ebb;
+      color: #fff;
+    }
+
+    .steps {
+      background: #f5f0ff;
+      border-left: 4px solid #7b2fbe;
+      padding: 8px 12px;
+      margin: 12px 0;
+    }
+
+    .steps strong {
+      color: #5a1f8a;
+    }
+
+    .trap {
+      background: #fdecec;
+      border-left: 4px solid #c0392b;
+      padding: 8px 12px;
+      margin: 12px 0;
+    }
+
+    .trap strong {
+      color: #a93226;
+    }
+
+    .prof {
+      background: #eef9f1;
+      border-left: 4px solid #27ae60;
+      padding: 8px 12px;
+      margin: 12px 0;
+    }
+
+    .input-row {
+      margin: 6px 0;
+    }
+
+    .input-row input {
+      padding: 4px 8px;
+      border: 1px solid #999;
+      border-radius: 3px;
+      width: 200px;
+      font-size: 11pt;
+    }
+
+    .input-row button {
+      padding: 4px 10px;
+      border: 1px solid #2a6ebb;
+      background: #eef4fb;
+      color: #1a4a8a;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+
+    .input-row button:hover {
+      background: #2a6ebb;
+      color: #fff;
+    }
+
+    .result {
+      font-weight: bold;
+      margin-left: 6px;
+    }
+
+    .ok {
+      color: green;
+    }
+
+    .fail {
+      color: #c0392b;
+    }
+
+    .quiz-q {
+      margin: 12px 0;
+    }
+
+    .quiz-q label {
+      display: block;
+      margin-left: 20px;
+    }
+
+    /* Плавающие кнопки и панели */
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .btn-hotkeys {
+      right: 20px;
+      background: #2a6ebb;
+      color: #fff;
+    }
+
+    .btn-hotkeys:hover {
+      background: #1a4a8a;
+    }
+
+    .btn-cheatsheet {
+      left: 20px;
+      background: #daa520;
+      color: #fff;
+    }
+
+    .btn-cheatsheet:hover {
+      background: #b8860b;
+    }
+
+    .floating-panel {
+      position: fixed;
+      bottom: 90px;
+      width: 360px;
+      max-height: 70vh;
+      overflow-y: auto;
+      background: #fff;
+      border: 2px solid #2a6ebb;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      padding: 12px 16px;
+      z-index: 1000;
+      display: none;
+    }
+
+    .floating-panel.open {
+      display: block;
+    }
+
+    #hotkeysPanel {
+      right: 20px;
+      border-color: #2a6ebb;
+    }
+
+    #cheatsheetPanel {
+      left: 20px;
+      border-color: #daa520;
+      width: 400px;
+    }
+
+    .floating-panel h3 {
+      margin-top: 0;
+      font-size: 13pt;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 6px;
+    }
+
+    #hotkeysPanel h3 {
+      color: #1a4a8a;
+    }
+
+    #cheatsheetPanel h3 {
+      color: #8b6508;
+    }
+
+    .floating-panel table {
+      font-size: 10.5pt;
+      margin: 6px 0;
+    }
+
+    .floating-panel th,
+    .floating-panel td {
+      padding: 4px 6px;
+    }
+
+    .floating-panel .close-btn {
+      float: right;
+      background: none;
+      border: none;
+      font-size: 16pt;
+      cursor: pointer;
+      color: #666;
+      line-height: 1;
+    }
+
+    .floating-panel .close-btn:hover {
+      color: #c0392b;
+    }
+
+    @media print {
+
+      .topbar,
+      .floating-btn,
+      .floating-panel {
+        display: none !important;
+      }
+
+      details.check:not([open]) .content {
+        display: none;
+      }
+
+      .no-print {
+        display: none;
+      }
+
+      body {
+        margin: 1cm;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="topbar no-print">
-  <button onclick="document.querySelectorAll('details.check').forEach(d => d.open = true)">Показать все проверки</button>
-  <button onclick="document.querySelectorAll('details.check').forEach(d => d.open = false)">Скрыть все</button>
-  <button onclick="window.print()">Печать</button>
-</div>
-
-<div class="title-page">
-  <h1>Курс «Excel с нуля: формулы и расчёты»</h1>
-  <p class="subtitle">Базовый курс для начинающих</p>
-  <p class="subtitle">8 модулей · 8 занятий по 45–60 минут</p>
-  <p class="subtitle">Учебное пособие с теорией, примерами и практическими заданиями</p>
-  <p class="meta">Составитель: ______________________</p>
-  <p class="meta">Год: 2025</p>
-</div>
-
-<h1>Оглавление</h1>
-<ol class="toc">
-  <li>Диагностический тест</li>
-  <li>Модуль 1. Введение в Excel</li>
-  <li>Модуль 2. Формулы и ссылки</li>
-  <li>Модуль 3. СУММ, СРЗНАЧ, ОКРУГЛ</li>
-  <li>Модуль 4. Сумма по условию</li>
-  <li>Модуль 5. Логические функции</li>
-  <li>Модуль 6. Поиск данных: ВПР</li>
-  <li>Модуль 7. Даты</li>
-  <li>Модуль 8. Рейтинг и Топ N</li>
-</ol>
-
-<!-- ============ ДИАГНОСТИЧЕСКИЙ ТЕСТ ============ -->
-<h1>Диагностический тест</h1>
-<p>Ответьте на 10 вопросов до начала курса.</p>
-<div class="quiz-q"><p><strong>1. Что означает адрес A1?</strong></p>
-<label><input type="radio" name="q1" value="a"> Ячейка в первом столбце, первой строке</label>
-<label><input type="radio" name="q1" value="b"> Первая ячейка листа</label>
-<label><input type="radio" name="q1" value="c"> Столбец A, строка 1, только для чисел</label></div>
-<div class="quiz-q"><p><strong>2. С какого знака начинается формула?</strong></p>
-<label><input type="radio" name="q2" value="a"> С плюса</label>
-<label><input type="radio" name="q2" value="b"> С равно</label>
-<label><input type="radio" name="q2" value="c"> С решётки</label></div>
-<div class="quiz-q"><p><strong>3. Что делает <code>=СУММ(A1:A5)</code>?</strong></p>
-<label><input type="radio" name="q3" value="a"> Складывает A1 и A5</label>
-<label><input type="radio" name="q3" value="b"> Складывает все числа от A1 до A5</label>
-<label><input type="radio" name="q3" value="c"> Умножает A1 на A5</label></div>
-<div class="quiz-q"><p><strong>4. Что означает <code>$A$1</code>?</strong></p>
-<label><input type="radio" name="q4" value="a"> Абсолютная ссылка</label>
-<label><input type="radio" name="q4" value="b"> Относительная ссылка</label>
-<label><input type="radio" name="q4" value="c"> Ошибка</label></div>
-<div class="quiz-q"><p><strong>5. Что делает <code>=СРЗНАЧ(B2:B10)</code>?</strong></p>
-<label><input type="radio" name="q5" value="a"> Сумму</label>
-<label><input type="radio" name="q5" value="b"> Среднее арифметическое</label>
-<label><input type="radio" name="q5" value="c"> Количество</label></div>
-<div class="quiz-q"><p><strong>6. Что такое <code>#Н/Д</code>?</strong></p>
-<label><input type="radio" name="q6" value="a"> Ошибка «значение не найдено»</label>
-<label><input type="radio" name="q6" value="b"> Ошибка деления на ноль</label>
-<label><input type="radio" name="q6" value="c"> Ошибка имени функции</label></div>
-<div class="quiz-q"><p><strong>7. Что делает <code>=ЕСЛИ(A1&gt;0;"Да";"Нет")</code>?</strong></p>
-<label><input type="radio" name="q7" value="a"> Возвращает «Да», если A1 больше 0, иначе «Нет»</label>
-<label><input type="radio" name="q7" value="b"> Складывает A1 и 0</label>
-<label><input type="radio" name="q7" value="c"> Округляет A1</label></div>
-<div class="quiz-q"><p><strong>8. Что делает <code>=ВПР(...)</code>?</strong></p>
-<label><input type="radio" name="q8" value="a"> Ищет значение в справочнике</label>
-<label><input type="radio" name="q8" value="b"> Считает сумму</label>
-<label><input type="radio" name="q8" value="c"> Строит диаграмму</label></div>
-<div class="quiz-q"><p><strong>9. Как Excel хранит даты?</strong></p>
-<label><input type="radio" name="q9" value="a"> Как текст</label>
-<label><input type="radio" name="q9" value="b"> Как числа (дни с 01.01.1900)</label>
-<label><input type="radio" name="q9" value="c"> Как картинку</label></div>
-<div class="quiz-q"><p><strong>10. Что делает <code>=РАНГ(B2;$B$2:$B$5)</code>?</strong></p>
-<label><input type="radio" name="q10" value="a"> Ставит место значения в диапазоне</label>
-<label><input type="radio" name="q10" value="b"> Сортирует таблицу</label>
-<label><input type="radio" name="q10" value="c"> Ищет максимум</label></div>
-<button onclick="checkQuiz()" style="padding:8px 16px; border:1px solid #2a6ebb; background:#2a6ebb; color:#fff; border-radius:4px; cursor:pointer; font-size:11pt;">Проверить тест</button>
-<div id="quizResult" style="margin-top:12px; font-weight:bold;"></div>
-<details class="check"><summary>Показать ключ к тесту</summary><div class="content">1 — a, 2 — b, 3 — b, 4 — a, 5 — b, 6 — a, 7 — a, 8 — a, 9 — b, 10 — a.<br><strong>Интерпретация:</strong> 8–10 — с модуля 3; 4–7 — с модуля 1; 0–3 — с модуля 1, медленно.</div></details>
-
-<!-- ============ МОДУЛЬ 1 ============ -->
-<div id="module1" class="module" data-cheatsheet="module1-cheat"></div>
-<h1>Модуль 1. Введение в Excel</h1>
-<h2>Цель модуля</h2>
-<p>Познакомиться с интерфейсом Excel и понять, что такое ячейка, диапазон и типы данных.</p>
-<h2>Теория</h2>
-<p>Excel — программа для работы с таблицами, но не просто «клеточки». Это вычислительная среда: данные вводятся один раз, а суммы, средние и проценты пересчитываются автоматически.</p>
-<p><strong>Аналогия:</strong> тетрадь в клетку, где каждая клетка умеет считать.</p>
-<ul>
-  <li><strong>Книга</strong> — файл Excel. <strong>Лист</strong> — страница внутри книги (ярлычки внизу).</li>
-  <li><strong>Ячейка</strong> — пересечение строки и столбца, адрес вида <code>A1</code>.</li>
-  <li><strong>Диапазон</strong> — <code>A1:A10</code> (столбец), <code>A1:D1</code> (строка), <code>A1:C5</code> (прямоугольник).</li>
-  <li><strong>Строка формул</strong> — поле сверху, показывает содержимое активной ячейки.</li>
-  <li><strong>Типы данных:</strong> текст (влево), число (вправо), формула (<code>=</code>), дата.</li>
-</ul>
-<div class="note"><strong>Важное правило:</strong> если число выровнено влево — Excel считает его текстом, и в расчётах оно не участвует. Причина — лишние символы (<code>25 руб.</code>, пробел).</div>
-<div class="figure-placeholder">📷 Место для скриншота: «Основные элементы окна Excel»<br><small>Подпишите: лента, строка формул, адрес ячейки, ярлычки листов, полосы прокрутки</small></div>
-<h2>Как это делается (пошагово)</h2>
-<div class="steps"><strong>Как выделить диапазон:</strong><ol><li>Нажми на первую ячейку (например, <code>A1</code>).</li><li>Зажми левую кнопку мыши и тяни до последней ячейки.</li><li>Или: выдели <code>A1</code>, зажми <code>Shift</code> и кликни на <code>A10</code>.</li></ol></div>
-<h2>Пример</h2>
-<table>
-  <tr><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
-  <tr><td>№</td><td>Фамилия</td><td>Имя</td><td>Возраст</td><td>Рост</td></tr>
-  <tr><td>1</td><td>Иванов</td><td>Петя</td><td>14</td><td>160</td></tr>
-  <tr><td>2</td><td>Петрова</td><td>Аня</td><td>13</td><td>155</td></tr>
-  <tr><td>3</td><td>Сидоров</td><td>Максим</td><td>14</td><td>170</td></tr>
-  <tr><td>4</td><td>Кузнецова</td><td>Маша</td><td>13</td><td>158</td></tr>
-</table>
-
-<h2>Задание 1.1. «Первая таблица»</h2>
-<div class="task">Создайте таблицу «Мои одноклассники» по образцу выше (4 ученика). Проверьте: числа выровнены вправо, текст — влево.</div>
-
-<h2>Задание 1.2. «Найди адрес»</h2>
-<div class="task">Запишите адреса:</div>
-<div class="input-row">1. Возраст Пети: <input id="ans1" type="text"> <button onclick="check('ans1','D2','res1')">Проверить</button> <span id="res1" class="result"></span></div>
-<div class="input-row">2. Рост Маши: <input id="ans2" type="text"> <button onclick="check('ans2','E5','res2')">Проверить</button> <span id="res2" class="result"></span></div>
-<div class="input-row">3. Диапазон фамилий: <input id="ans3" type="text"> <button onclick="check('ans3','B2:B5','res3')">Проверить</button> <span id="res3" class="result"></span></div>
-<div class="input-row">4. Диапазон возрастов: <input id="ans4" type="text"> <button onclick="check('ans4','D2:D5','res4')">Проверить</button> <span id="res4" class="result"></span></div>
-<details class="check"><summary>Показать проверку</summary><div class="content"><strong>Ответ:</strong> <code>D2</code>, <code>E5</code>, <code>B2:B5</code>, <code>D2:D5</code>.</div></details>
-
-<h2>Задание 1.3. «Адрес и диапазон» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">
-Дана таблица:
-<table>
-  <tr><th>A</th><th>B</th><th>C</th><th>D</th></tr>
-  <tr><td>Товар</td><td>Цена</td><td>Кол-во</td><td>Сумма</td></tr>
-  <tr><td>Ручка</td><td>25</td><td>10</td><td></td></tr>
-  <tr><td>Тетрадь</td><td>40</td><td>5</td><td></td></tr>
-  <tr><td>Карандаш</td><td>15</td><td>20</td><td></td></tr>
-</table>
-Запишите адреса: 1. Цена тетради. 2. Количество карандашей. 3. Диапазон всех цен. 4. Диапазон всех сумм.
-</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>B3</code>, <code>C4</code>, <code>B2:B4</code>, <code>D2:D4</code>.</div></details>
-
-<h2>Задание 1.4. «Текст или число?» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Определите, что Excel считает текстом, а что числом:
-<table>
-  <tr><th>Запись</th><th>Текст или число?</th></tr>
-  <tr><td>25</td><td></td></tr>
-  <tr><td>25 руб.</td><td></td></tr>
-  <tr><td>1 250</td><td></td></tr>
-  <tr><td>1250,5</td><td></td></tr>
-  <tr><td>«100»</td><td></td></tr>
-</table>
-</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Число; текст (лишние символы); текст (пробел); число; текст (кавычки).</div></details>
-
-<h2>Задание 1.5. «Листы книги» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">В книге три листа: «Продажи», «Склад», «Отчёт». Запишите, как обратиться к ячейке <code>B2</code>: 1. На листе «Продажи». 2. На листе «Склад». 3. На листе «Отчёт».</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>Продажи!B2</code>, <code>Склад!B2</code>, <code>Отчёт!B2</code>. Если в имени листа есть пробел — <code>'Мой лист'!B2</code>.</div></details>
-
-<h2>Задание 1.6. «Структура таблицы» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Создайте таблицу «Расписание уроков» на 5 дней (понедельник–пятница), 6 уроков. Заголовки: «День», «Урок 1» … «Урок 6». Заполните 3 предметами.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Проверяется: заголовки в первой строке, дни в первом столбце, числа/текст выровнены правильно.</div></details>
-
-<h2>Задание 1.7. «Найди лишнее» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">В каждой строке найдите лишнее: 1. <code>A1</code>, <code>B2</code>, <code>C3</code>, <code>1A</code>. 2. Книга, Лист, Ячейка, Диаграмма. 3. Текст, Число, Формула, Картинка.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">1. <code>1A</code> — неверный адрес (сначала буква). 2. Диаграмма — не элемент структуры. 3. Картинка — не тип данных ячейки.</div></details>
-
-<h2>Ловушка</h2>
-<div class="trap"><strong>Найди ошибку:</strong> в таблице одно число введено как «25 руб.» — оно выровнено влево и не участвует в сумме. Как исправить?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Убрать «руб.» и пробел, оставить только число <code>25</code>. Либо преобразовать через «Данные → Текст по столбцам».</div></details>
-<div class="prof"><strong>Где это используют:</strong> учитель — список класса, бухгалтер — список сотрудников, менеджер — список клиентов.</div>
-
-<!-- Скрытый шаблон шпаргалки для модуля 1 -->
-<div id="module1-cheat" style="display:none;">
-  <table>
-    <tr><th>Понятие</th><th>Пример / Правило</th></tr>
-    <tr><td>Адрес ячейки</td><td><code>A1</code> — столбец + строка</td></tr>
-    <tr><td>Диапазон</td><td><code>A1:A10</code> (столбец), <code>A1:D1</code> (строка), <code>A1:C5</code> (прямоугольник)</td></tr>
-    <tr><td>Лист</td><td><code>Лист1!A1</code> — ссылка на другой лист</td></tr>
-    <tr><td>Текст</td><td>Выровнен влево</td></tr>
-    <tr><td>Число</td><td>Выровнено вправо</td></tr>
-    <tr><td>Формула</td><td>Начинается с <code>=</code></td></tr>
-    <tr><td>Типичная ошибка</td><td>Число с лишними символами («25 руб.») → становится текстом</td></tr>
-  </table>
-</div>
-
-<!-- ============ МОДУЛЬ 2 ============ -->
-<div id="module2" class="module" data-cheatsheet="module2-cheat"></div>
-<h1>Модуль 2. Формулы и ссылки</h1>
-<h2>Цель модуля</h2>
-<p>Научиться писать формулы и понимать разницу между относительными и абсолютными ссылками.</p>
-<h2>Теория</h2>
-<p><strong>Формула</strong> — инструкция для Excel, всегда начинается с <code>=</code>. Без него запись станет текстом.</p>
-<p><strong>Главный принцип:</strong> в формулу вставляем адреса ячеек, а не числа. Тогда при изменении данных результат пересчитается сам.</p>
-<p><strong>Операторы:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>, <code>%</code>. Приоритет как в математике, скобки меняют порядок.</p>
-<ul>
-  <li><code>A1</code> — относительная: при копировании сдвигается.</li>
-  <li><code>$A$1</code> — абсолютная: не меняется.</li>
-  <li><code>$A1</code> / <code>A$1</code> — смешанная.</li>
-</ul>
-<div class="note"><strong>Когда нужна <code>$</code>:</strong> когда формула ссылается на постоянную ячейку — ставку, скидку, справочник. <strong>F4</strong> переключает режимы ссылки.</div>
-<h2>Как это делается (пошагово)</h2>
-<div class="steps"><strong>Как поставить <code>$</code>:</strong><ol><li>В формуле выдели ссылку, например <code>B6</code>.</li><li>Нажми <code>F4</code> — станет <code>$B$6</code>.</li><li>Ещё раз <code>F4</code> — <code>B$6</code>, ещё — <code>$B6</code>, ещё — <code>B6</code>.</li></ol></div>
-<div class="steps"><strong>Как протянуть формулу:</strong><ol><li>Выдели ячейку с формулой.</li><li>Наведи курсор на правый нижний угол — появится квадрат (маркер заполнения).</li><li>Потяни вниз (или двойной клик — до конца данных).</li></ol></div>
-<div class="figure-placeholder">📷 Место для скриншота: «Маркер заполнения в правом нижнем углу ячейки»<br><small>Покажите маленький квадрат и стрелку протягивания</small></div>
-<h2>Пример</h2>
-<p><strong>Калькулятор:</strong></p>
-<table>
-  <tr><th>A</th><th>B</th><th>C</th></tr>
-  <tr><td>10</td><td>5</td><td><code>=A1+B1</code> → 15</td></tr>
-  <tr><td>20</td><td>4</td><td><code>=A2*B2</code> → 80</td></tr>
-  <tr><td>100</td><td>8</td><td><code>=A3/B3</code> → 12,5</td></tr>
-</table>
-<p><strong>Скидка:</strong> <code>B6 = 10%</code></p>
-<table>
-  <tr><th>Товар</th><th>Цена</th><th>Кол-во</th><th>Стоимость</th><th>Со скидкой</th></tr>
-  <tr><td>Ручка</td><td>25</td><td>10</td><td><code>=B8*C8</code></td><td><code>=B8*(1-$B$6)</code></td></tr>
-  <tr><td>Тетрадь</td><td>40</td><td>5</td><td><code>=B9*C9</code></td><td><code>=B9*(1-$B$6)</code></td></tr>
-  <tr><td>Карандаш</td><td>15</td><td>20</td><td><code>=B10*C10</code></td><td><code>=B10*(1-$B$6)</code></td></tr>
-</table>
-
-<h2>Задание 2.1. «Калькулятор»</h2>
-<div class="input-row">C1 (10+5): <input id="ans21" type="text"> <button onclick="check('ans21','=A1+B1','res21')">Проверить</button> <span id="res21" class="result"></span></div>
-<div class="input-row">C2 (20*4): <input id="ans22" type="text"> <button onclick="check('ans22','=A2*B2','res22')">Проверить</button> <span id="res22" class="result"></span></div>
-<div class="input-row">C3 (100/8): <input id="ans23" type="text"> <button onclick="check('ans23','=A3/B3','res23')">Проверить</button> <span id="res23" class="result"></span></div>
-<details class="check"><summary>Показать проверку</summary><div class="content"><code>=A1+B1 → 15</code>, <code>=A2*B2 → 80</code>, <code>=A3/B3 → 12,5</code>.</div></details>
-
-<h2>Задание 2.2. «Скидка»</h2>
-<div class="input-row">Формула для E8: <input id="ans24" type="text"> <button onclick="check('ans24','=B8*(1-$B$6)','res24')">Проверить</button> <span id="res24" class="result"></span></div>
-
-<h2>Задание 2.3. «Найди ошибку»</h2>
-<table>
-  <tr><th>Формула</th><th>Что не так?</th></tr>
-  <tr><td><code>=СУММ(A1:A5</code></td><td></td></tr>
-  <tr><td><code>=A1+B1)</code></td><td></td></tr>
-  <tr><td><code>A1+B1</code></td><td></td></tr>
-  <tr><td><code>=СУММ(A1;A5)</code></td><td></td></tr>
-</table>
-<details class="check"><summary>Показать проверку</summary><div class="content">1. Не хватает закрывающей скобки. 2. Лишняя скобка. 3. Нет <code>=</code> — это текст. 4. Правильно.</div></details>
-
-<h2>Задание 2.4. «Четыре действия» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Даны числа: <code>A1 = 12</code>, <code>B1 = 4</code>. Запишите формулы: 1. Сумма. 2. Разность. 3. Произведение. 4. Частное.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=A1+B1</code> → 16; <code>=A1-B1</code> → 8; <code>=A1*B1</code> → 48; <code>=A1/B1</code> → 3.</div></details>
-
-<h2>Задание 2.5. «Приоритет операций» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Вычислите вручную, затем проверьте в Excel: 1. <code>=2+3*4</code>. 2. <code>=(2+3)*4</code>. 3. <code>=10-2^2</code>. 4. <code>=10/2+3</code>.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">14; 20; 6; 8. Скобки и степень меняют порядок.</div></details>
-
-<h2>Задание 2.6. «Абсолютная ссылка» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">В <code>B1</code> записано <code>100</code> (константа). В <code>A1:A3</code> — числа <code>5, 10, 15</code>. Нужно умножить каждое на <code>B1</code>. Запишите формулу для <code>C1</code>, которую можно протянуть вниз.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=A1*$B$1</code>. Без <code>$</code> при протягивании <code>B1</code> станет <code>B2</code>, <code>B3</code> — пустыми.</div></details>
-
-<h2>Задание 2.7. «Смешанная ссылка» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Что означает ссылка <code>$A1</code>? А <code>A$1</code>? Приведите пример, когда нужна каждая.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>$A1</code> — фиксирован столбец A, строка меняется. Нужна, когда протягиваем вправо, а столбец должен остаться. <code>A$1</code> — фиксирована строка 1, столбец меняется. Нужна при протягивании вниз.</div></details>
-
-<h2>Задание 2.8. «Найди ошибку в формуле» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new"><pre>1. =A1++B1
-2. =A1*/B1
-3. =A1 B1
-4. =A1+B1*</pre></div>
-<details class="check"><summary>Показать ответ</summary><div class="content">1. Два плюса подряд. 2. Два оператора подряд. 3. Нет оператора. 4. Не закрыто выражение после <code>*</code>.</div></details>
-
-<h2>Ловушка</h2>
-<div class="trap"><strong>Почему при протягивании <code>=B8*(1-B6)</code> вниз появляется ошибка?</strong> Подсказка: что происходит с <code>B6</code> в строке 9?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Без <code>$</code> ссылка <code>B6</code> при протягивании становится <code>B7</code>, <code>B8</code>… — там нет скидки. Нужно <code>$B$6</code>.</div></details>
-<div class="prof"><strong>Где это используют:</strong> продавец — скидки, бухгалтер — налоги, аналитик — проценты роста.</div>
-
-<!-- Скрытый шаблон шпаргалки для модуля 2 -->
-<div id="module2-cheat" style="display:none;">
-  <table>
-    <tr><th>Понятие</th><th>Пример / Правило</th></tr>
-    <tr><td>Формула</td><td>Всегда начинается с <code>=</code></td></tr>
-    <tr><td>Операторы</td><td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>, <code>%</code></td></tr>
-    <tr><td>Приоритет</td><td>Как в математике, скобки меняют порядок</td></tr>
-    <tr><td>Относительная ссылка</td><td><code>A1</code> — меняется при копировании</td></tr>
-    <tr><td>Абсолютная ссылка</td><td><code>$A$1</code> — не меняется</td></tr>
-    <tr><td>Смешанная</td><td><code>$A1</code> или <code>A$1</code></td></tr>
-    <tr><td>Быстрая фиксация</td><td><code>F4</code> переключает режимы ссылки</td></tr>
-  </table>
-</div>
-
-<!-- ============ МОДУЛЬ 3 ============ -->
-<div id="module3" class="module" data-cheatsheet="module3-cheat"></div>
-<h1>Модуль 3. СУММ, СРЗНАЧ, ОКРУГЛ</h1>
-<h2>Цель модуля</h2>
-<p>Освоить первые функции: сумма, среднее, округление.</p>
-<h2>Теория</h2>
-<p><strong>Функция</strong> — готовая формула с именем. Вместо <code>=A1+A2+A3+A4+A5</code> пишешь <code>=СУММ(A1:A5)</code>.</p>
-<p><strong>Синтаксис:</strong> <code>=ИМЯ(аргументы)</code>. Аргументы разделяются <code>;</code> (русская локаль) или <code>,</code> (английская).</p>
-<ul>
-  <li><code>=СУММ(C2:C5)</code> — складывает числа. Текст и пустые игнорируются.</li>
-  <li><code>=СРЗНАЧ(C2:C5)</code> — среднее: сумма / количество числовых ячеек.</li>
-  <li><code>=ОКРУГЛ(число; знаков)</code> — <code>0</code> до целого, <code>2</code> два знака, <code>-1</code> до десятков.</li>
-</ul>
-<p><strong>Комбинирование:</strong> <code>=ОКРУГЛ(СРЗНАЧ(C2:C5);0)</code> — функция внутри функции.</p>
-<h2>Как это делается (пошагово)</h2>
-<div class="steps"><strong>Как вставить функцию:</strong><ol><li>Выдели ячейку результата.</li><li>Начни вводить <code>=</code> и первые буквы имени — Excel подскажет.</li><li>Выбери функцию двойным кликом, выдели диапазон мышью, закрой скобку.</li><li><code>Enter</code>.</li></ol></div>
-<h2>Пример</h2>
-<table>
-  <tr><th>День</th><th>Товар</th><th>Сумма</th></tr>
-  <tr><td>Пн</td><td>Ручка</td><td>1250,456</td></tr>
-  <tr><td>Вт</td><td>Тетрадь</td><td>980,789</td></tr>
-  <tr><td>Ср</td><td>Карандаш</td><td>1430,123</td></tr>
-  <tr><td>Чт</td><td>Ручка</td><td>1100,5</td></tr>
-</table>
-<table>
-  <tr><th>Показатель</th><th>Значение</th></tr>
-  <tr><td>Общая сумма</td><td><code>=СУММ(C2:C5)</code> → 4761,868</td></tr>
-  <tr><td>Среднее</td><td><code>=СРЗНАЧ(C2:C5)</code> → 1190,467</td></tr>
-  <tr><td>Среднее округлённое</td><td><code>=ОКРУГЛ(F3;0)</code> → 1190</td></tr>
-  <tr><td>Максимум</td><td><code>=МАКС(C2:C5)</code> → 1430,123</td></tr>
-</table>
-
-<h2>Задание 3.1. «Продажи за неделю»</h2>
-<div class="input-row">Сумма: <input id="ans31" type="text"> <button onclick="check('ans31','=СУММ(C2:C5)','res31')">Проверить</button> <span id="res31" class="result"></span></div>
-<div class="input-row">Среднее: <input id="ans32" type="text"> <button onclick="check('ans32','=СРЗНАЧ(C2:C5)','res32')">Проверить</button> <span id="res32" class="result"></span></div>
-<div class="input-row">Округлить среднее: <input id="ans33" type="text"> <button onclick="check('ans33','=ОКРУГЛ(F3;0)','res33')">Проверить</button> <span id="res33" class="result"></span></div>
-
-<h2>Задание 3.2. «Сумма нескольких диапазонов» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Даны два столбца: <code>A1:A3 = 10, 20, 30</code> и <code>C1:C3 = 5, 15, 25</code>. Найдите общую сумму одной формулой.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=СУММ(A1:A3;C1:C3)</code> → 105. Диапазоны перечисляются через <code>;</code>.</div></details>
-
-<h2>Задание 3.3. «Округление вверх и вниз» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Число <code>12,345</code>. Запишите формулы: 1. Округлить до 2 знаков. 2. Округлить вверх до целого. 3. Округлить вниз до целого. 4. Отбросить дробную часть.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ОКРУГЛ(12,345;2)</code> → 12,35; <code>=ОКРУГЛВВЕРХ(12,345;0)</code> → 13; <code>=ОКРУГЛВНИЗ(12,345;0)</code> → 12; <code>=ЦЕЛОЕ(12,345)</code> → 12.</div></details>
-
-<h2>Задание 3.4. «Среднее без текста» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">В диапазоне <code>A1:A5</code>: <code>10, 20, «нет», 30, 40</code>. Что вернёт <code>=СРЗНАЧ(A1:A5)</code>? А <code>=СУММ(A1:A5)</code>?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>СРЗНАЧ</code> → 25 (делит на 4 числа, текст игнорируется). <code>СУММ</code> → 100.</div></details>
-
-<h2>Задание 3.5. «Комбинированная формула» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Найдите среднее значение диапазона <code>B2:B10</code> и округлите до 1 знака после запятой. Запишите одной формулой.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ОКРУГЛ(СРЗНАЧ(B2:B10);1)</code>. Функция внутри функции.</div></details>
-
-<h2>Задание 3.6. «Минимум и максимум» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Даны числа: <code>45, 12, 78, 23, 56</code>. Запишите формулы: 1. Максимум. 2. Минимум. 3. Размах (макс − мин).</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=МАКС(A1:A5)</code> → 78; <code>=МИН(A1:A5)</code> → 12; <code>=МАКС(A1:A5)-МИН(A1:A5)</code> → 66.</div></details>
-
-<h2>Мини-проект 3. «Калькулятор расходов»</h2>
-<table>
-  <tr><th>Статья</th><th>Сумма</th></tr>
-  <tr><td>Продукты</td><td>4500</td></tr>
-  <tr><td>Транспорт</td><td>1200</td></tr>
-  <tr><td>Кафе</td><td>2300</td></tr>
-  <tr><td>Развлечения</td><td>1800</td></tr>
-  <tr><td><strong>Итого</strong></td><td></td></tr>
-  <tr><td><strong>Средний расход</strong></td><td></td></tr>
-</table>
-<details class="check"><summary>Показать проверку</summary><div class="content">Итого: <code>=СУММ(B2:B5)</code> → 9800. Средний: <code>=СРЗНАЧ(B2:B5)</code> → 2450.</div></details>
-
-<h2>Ловушка</h2>
-<div class="trap"><strong>Почему <code>СРЗНАЧ</code> даёт не то число?</strong> В диапазоне 5 ячеек: 4 числа и 1 текст «нет данных». На что делит Excel?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Excel делит на количество <strong>числовых</strong> ячеек (4), а не на всех (5). Текст игнорируется.</div></details>
-<div class="prof"><strong>Где это используют:</strong> бухгалтер — итоги месяца, учитель — средний балл, менеджер — средний чек.</div>
-
-<!-- Скрытый шаблон шпаргалки для модуля 3 -->
-<div id="module3-cheat" style="display:none;">
-  <table>
-    <tr><th>Функция</th><th>Что делает</th><th>Пример</th></tr>
-    <tr><td><code>СУММ</code></td><td>Сумма диапазона</td><td><code>=СУММ(C2:C5)</code></td></tr>
-    <tr><td><code>СРЗНАЧ</code></td><td>Среднее арифметическое</td><td><code>=СРЗНАЧ(C2:C5)</code></td></tr>
-    <tr><td><code>ОКРУГЛ</code></td><td>Округление до N знаков</td><td><code>=ОКРУГЛ(A1;2)</code></td></tr>
-    <tr><td><code>МАКС</code></td><td>Максимальное значение</td><td><code>=МАКС(C2:C5)</code></td></tr>
-    <tr><td><code>МИН</code></td><td>Минимальное значение</td><td><code>=МИН(C2:C5)</code></td></tr>
-    <tr><td>Вложенность</td><td>Функция внутри функции</td><td><code>=ОКРУГЛ(СРЗНАЧ(A1:A5);0)</code></td></tr>
-  </table>
-</div>
-
-<!-- ============ МОДУЛЬ 4 ============ -->
-<div id="module4" class="module" data-cheatsheet="module4-cheat"></div>
-<h1>Модуль 4. Сумма по условию</h1>
-<h2>Цель модуля</h2>
-<p>Научиться складывать и считать только то, что подходит под условие.</p>
-<h2>Теория</h2>
-<ul>
-  <li><code>=СУММЕСЛИ(диапазон_условия; условие; диапазон_суммирования)</code></li>
-  <li><code>=СЧЁТЕСЛИ(диапазон; условие)</code> — количество.</li>
-  <li><code>=СРЗНАЧЕСЛИ(...)</code> — среднее по условию.</li>
-  <li><code>=СУММЕСЛИМН(сумма; условие1; условие2; ...)</code> — порядок другой!</li>
-</ul>
-<p><strong>Правила условий:</strong></p>
-<table>
-  <tr><th>Что ищем</th><th>Как записать</th></tr>
-  <tr><td>Текст</td><td><code>"Ручка"</code></td></tr>
-  <tr><td>Больше</td><td><code>">1000"</code></td></tr>
-  <tr><td>Не равно</td><td><code>"<>Ручка"</code></td></tr>
-</table>
-<div class="note">Сравнения всегда в кавычках. Текст без кавычек — ошибка.</div>
-<h2>Как это делается (пошагово)</h2>
-<div class="steps"><strong>Как записать СУММЕСЛИ:</strong><ol><li><code>=СУММЕСЛИ(</code></li><li>Выдели диапазон, где ищем условие (например, <code>B2:B5</code>).</li><li>Поставь <code>;</code> и напиши условие в кавычках: <code>"Ручка"</code>.</li><li>Поставь <code>;</code> и выдели диапазон, который складываем (<code>C2:C5</code>).</li><li>Закрой скобку, <code>Enter</code>.</li></ol></div>
-<h2>Пример</h2>
-<table>
-  <tr><th>День</th><th>Товар</th><th>Сумма</th><th>Менеджер</th></tr>
-  <tr><td>Пн</td><td>Ручка</td><td>1250</td><td>Иванов</td></tr>
-  <tr><td>Вт</td><td>Тетрадь</td><td>980</td><td>Петров</td></tr>
-  <tr><td>Ср</td><td>Карандаш</td><td>1430</td><td>Иванов</td></tr>
-  <tr><td>Чт</td><td>Ручка</td><td>1100</td><td>Петров</td></tr>
-</table>
-<table>
-  <tr><th>Показатель</th><th>Значение</th></tr>
-  <tr><td>Сумма «Ручки»</td><td><code>=СУММЕСЛИ(B2:B5;"Ручка";C2:C5)</code> → 2350</td></tr>
-  <tr><td>Кол-во &gt; 1000</td><td><code>=СЧЁТЕСЛИ(C2:C5;">1000")</code> → 3</td></tr>
-  <tr><td>Иванов + Ручка</td><td><code>=СУММЕСЛИМН(C2:C5;D2:D5;"Иванов";B2:B5;"Ручка")</code> → 1250</td></tr>
-</table>
-
-<h2>Задание 4.1</h2>
-<div class="input-row">Сумма «Ручки»: <input id="ans41" type="text"> <button onclick="check('ans41','=СУММЕСЛИ(B2:B5;\"Ручка\";C2:C5)','res41')">Проверить</button> <span id="res41" class="result"></span></div>
-<div class="input-row">Кол-во &gt; 1000: <input id="ans42" type="text"> <button onclick="check('ans42','=СЧЁТЕСЛИ(C2:C5;\">1000\")','res42')">Проверить</button> <span id="res42" class="result"></span></div>
-
-<h2>Задание 4.3. «Сумма по числовому условию» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Продажи: <code>500, 1200, 800, 1500, 300</code>. Найдите сумму продаж больше 700.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=СУММЕСЛИ(A1:A5;">700")</code> → 3500. Если диапазон условия = диапазон суммирования, третий аргумент можно опустить.</div></details>
-
-<h2>Задание 4.4. «Счёт по тексту» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">В столбце <code>B</code> товары: Ручка, Тетрадь, Ручка, Карандаш, Ручка. Сколько раз встречается «Ручка»?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=СЧЁТЕСЛИ(B1:B5;"Ручка")</code> → 3.</div></details>
-
-<h2>Задание 4.5. «Среднее по условию» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Оценки: <code>5, 4, 3, 5, 4, 2</code>. Найдите среднее только для оценок ≥4.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=СРЗНАЧЕСЛИ(A1:A6;">=4")</code> → (5+4+5+4)/4 = 4,5.</div></details>
-
-<h2>Задание 4.6. «Два условия» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Продажи: товар (Ручка/Тетрадь), менеджер (Иванов/Петров), сумма. Найдите сумму продаж Ручки у Иванова.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=СУММЕСЛИМН(C2:C10;A2:A10;"Ручка";B2:B10;"Иванов")</code>. Сначала диапазон суммирования, потом пары.</div></details>
-
-<h2>Задание 4.7. «Не равно» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Найдите сумму всех продаж, кроме товара «Карандаш».</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=СУММЕСЛИ(A2:A10;"<>Карандаш";C2:C10)</code>. Оператор «не равно» — <code>&lt;&gt;</code>.</div></details>
-
-<h2>Ловушка</h2>
-<div class="trap"><strong>Почему <code>СУММЕСЛИ</code> возвращает 0?</strong> Условие записано как <code>Ручка</code> без кавычек. Что не так?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Текст в условии должен быть в кавычках: <code>"Ручка"</code>. Без кавычек Excel ищет ссылку на ячейку с именем «Ручка» и не находит.</div></details>
-<div class="prof"><strong>Где это используют:</strong> менеджер — продажи по товару, бухгалтер — расходы по статье, логист — заказы по клиенту.</div>
-
-<!-- Скрытый шаблон шпаргалки для модуля 4 -->
-<div id="module4-cheat" style="display:none;">
-  <table>
-    <tr><th>Функция</th><th>Что делает</th><th>Пример</th></tr>
-    <tr><td><code>СУММЕСЛИ</code></td><td>Сумма по одному условию</td><td><code>=СУММЕСЛИ(B:B;"Ручка";C:C)</code></td></tr>
-    <tr><td><code>СЧЁТЕСЛИ</code></td><td>Количество по условию</td><td><code>=СЧЁТЕСЛИ(C:C;">1000")</code></td></tr>
-    <tr><td><code>СРЗНАЧЕСЛИ</code></td><td>Среднее по условию</td><td><code>=СРЗНАЧЕСЛИ(A:A;">=4")</code></td></tr>
-    <tr><td><code>СУММЕСЛИМН</code></td><td>Сумма по нескольким условиям</td><td><code>=СУММЕСЛИМН(C:C;A:A;"Ручка";B:B;"Иванов")</code></td></tr>
-    <tr><td>Порядок аргументов</td><td>В СУММЕСЛИМН сначала диапазон суммирования</td><td><code>=СУММЕСЛИМН(что; где1; что1; где2; что2)</code></td></tr>
-    <tr><td>Текст в условии</td><td>Всегда в кавычках</td><td><code>"Ручка"</code>, <code>">1000"</code></td></tr>
-  </table>
-</div>
-
-<!-- ============ МОДУЛЬ 5 ============ -->
-<div id="module5" class="module" data-cheatsheet="module5-cheat"></div>
-<h1>Модуль 5. Логические функции</h1>
-<h2>Цель модуля</h2>
-<p>Научиться ставить оценки и пометки автоматически.</p>
-<h2>Теория</h2>
-<ul>
-  <li><code>=ЕСЛИ(условие; если_истина; если_ложь)</code></li>
-  <li>Вложенные <code>ЕСЛИ</code> — для &gt;2 вариантов. Проверка по порядку, стоп на первом истинном.</li>
-  <li><code>И</code> — все условия истинны. <code>ИЛИ</code> — хотя бы одно.</li>
-</ul>
-<div class="note">Текст в кавычках (<code>"Да"</code>), порядок вложенных <code>ЕСЛИ</code> важен (сначала строгое условие).</div>
-<h2>Как это делается (пошагово)</h2>
-<div class="steps"><strong>Как записать вложенное ЕСЛИ:</strong><ol><li><code>=ЕСЛИ(</code> условие <code>;</code> «что если да» <code>;</code></li><li>вместо «что если нет» снова <code>ЕСЛИ(</code> условие2 <code>;</code> … <code>;</code> … <code>)</code></li><li>закрой все скобки — их должно быть столько же, сколько открыл.</li></ol></div>
-<h2>Пример</h2>
-<table>
-  <tr><th>Ученик</th><th>Балл</th><th>Посещаемость</th><th>Оценка</th><th>Статус</th></tr>
-  <tr><td>Аня</td><td>85</td><td>95</td><td><code>=ЕСЛИ(B2&gt;=80;"5";ЕСЛИ(B2&gt;=60;"4";"3"))</code> → 5</td><td><code>=ЕСЛИ(И(B2&gt;=80;C2&gt;=90);"Молодец";"—")</code> → Молодец</td></tr>
-  <tr><td>Петя</td><td>72</td><td>88</td><td>→ 4</td><td>→ —</td></tr>
-  <tr><td>Маша</td><td>45</td><td>70</td><td>→ 3</td><td>→ —</td></tr>
-  <tr><td>Вова</td><td>91</td><td>92</td><td>→ 5</td><td>→ Молодец</td></tr>
-</table>
-
-<h2>Задание 5.1</h2>
-<div class="input-row">Оценка Ани: <input id="ans51" type="text"> <button onclick="check('ans51','=ЕСЛИ(B2>=80;\"5\";ЕСЛИ(B2>=60;\"4\";\"3\"))','res51')">Проверить</button> <span id="res51" class="result"></span></div>
-<h2>Задание 5.2</h2>
-<div class="input-row">Статус Ани: <input id="ans52" type="text"> <button onclick="check('ans52','=ЕСЛИ(И(B2>=80;C2>=90);\"Молодец\";\"—\")','res52')">Проверить</button> <span id="res52" class="result"></span></div>
-
-<h2>Задание 5.4. «Два условия через И» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Сотрудник получает премию, если стаж ≥ 5 лет <strong>и</strong> рейтинг ≥ 4. Запишите формулу для столбца «Премия».</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ЕСЛИ(И(B2>=5;C2>=4);"Да";"Нет")</code>.</div></details>
-
-<h2>Задание 5.5. «Условие через ИЛИ» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Товар на распродаже, если цена &lt; 500 <strong>или</strong> скидка &gt; 20%. Запишите формулу.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ЕСЛИ(ИЛИ(B2<500;C2>20);"Распродажа";"Обычная")</code>.</div></details>
-
-<h2>Задание 5.6. «Три варианта» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Возрастная категория: до 18 — «Ребёнок», 18–60 — «Взрослый», старше 60 — «Пенсионер». Запишите вложенное ЕСЛИ.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ЕСЛИ(A2<18;"Ребёнок";ЕСЛИ(A2<=60;"Взрослый";"Пенсионер"))</code>. Порядок: сначала строгое, потом мягче.</div></details>
-
-<h2>Задание 5.7. «ЕСЛИ с текстом» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Если товар «Ручка», написать «Канцелярия», иначе — «Прочее». Запишите формулу.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ЕСЛИ(A2="Ручка";"Канцелярия";"Прочее")</code>. Текст в кавычках.</div></details>
-
-<h2>Задание 5.8. «Найди логическую ошибку» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new"><pre>=ЕСЛИ(A1>10;"Много";ЕСЛИ(A1>5;"Средне";"Мало"))</pre>Что вернёт при <code>A1 = 7</code>? А при <code>A1 = 12</code>? Есть ли ошибка?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">При 7 → «Средне»; при 12 → «Много». Ошибки нет — порядок правильный (сначала строгое &gt;10).</div></details>
-
-<h2>Ловушка</h2>
-<div class="trap"><strong>Почему все получают «4»?</strong> Формула: <code>=ЕСЛИ(B2&gt;=60;"4";ЕСЛИ(B2&gt;=80;"5";"3"))</code>. В чём ошибка?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Условия стоят не по порядку. Сначала проверяется ≥60 — оно истинно для всех, кто ≥60, и до ≥80 дело не доходит. Нужно сначала строгое: <code>≥80</code>, потом <code>≥60</code>.</div></details>
-<div class="prof"><strong>Где это используют:</strong> учитель — оценки, HR — категории сотрудников, менеджер — статусы заказов.</div>
-
-<!-- Скрытый шаблон шпаргалки для модуля 5 -->
-<div id="module5-cheat" style="display:none;">
-  <table>
-    <tr><th>Функция</th><th>Что делает</th><th>Пример</th></tr>
-    <tr><td><code>ЕСЛИ</code></td><td>Проверка условия (2 варианта)</td><td><code>=ЕСЛИ(A1&gt;0;"Да";"Нет")</code></td></tr>
-    <tr><td>Вложенное <code>ЕСЛИ</code></td><td>Больше двух вариантов</td><td><code>=ЕСЛИ(B2&gt;=80;"5";ЕСЛИ(B2&gt;=60;"4";"3"))</code></td></tr>
-    <tr><td><code>И</code></td><td>Все условия истинны</td><td><code>=ЕСЛИ(И(A1&gt;0;B1&lt;5);"Да";"Нет")</code></td></tr>
-    <tr><td><code>ИЛИ</code></td><td>Хотя бы одно истинно</td><td><code>=ЕСЛИ(ИЛИ(A1&gt;10;B1&lt;2);"Да";"Нет")</code></td></tr>
-    <tr><td>Правило</td><td>Текст всегда в кавычках</td><td><code>"Молодец"</code>, <code>"—"</code></td></tr>
-    <tr><td>Порядок</td><td>Сначала строгое условие, потом мягче</td><td><code>&gt;=80</code>, потом <code>&gt;=60</code></td></tr>
-  </table>
-</div>
-
-<!-- ============ МОДУЛЬ 6 ============ -->
-<div id="module6" class="module" data-cheatsheet="module6-cheat"></div>
-<h1>Модуль 6. Поиск данных: ВПР</h1>
-<h2>Цель модуля</h2>
-<p>Научиться подставлять данные из справочника автоматически.</p>
-<h2>Теория</h2>
-<p><code>=ВПР(искомое; таблица; номер_столбца; ЛОЖЬ)</code></p>
-<ul>
-  <li>Искомое — в первом столбце справочника.</li>
-  <li>Таблица — абсолютная (<code>$A$2:$B$4</code>).</li>
-  <li><code>ЛОЖЬ</code> — точное совпадение.</li>
-</ul>
-<div class="note"><strong>Ошибка <code>#Н/Д</code></strong> — значение не найдено. Лечится <code>=ЕСЛИОШИБКА(ВПР(...);"Нет в прайсе")</code>.</div>
-<h2>Как это делается (пошагово)</h2>
-<div class="steps"><strong>Как записать ВПР:</strong><ol><li><code>=ВПР(</code></li><li>Кликни на ячейку с искомым значением (например, <code>D2</code> — «Ручка»).</li><li><code>;</code> — выдели справочник и нажми <code>F4</code>, чтобы стал <code>$A$2:$B$4</code>.</li><li><code>;</code> — номер столбца, откуда брать результат (<code>2</code> — цена).</li><li><code>;</code> — <code>ЛОЖЬ</code> — точное совпадение.</li><li>Закрой скобку, <code>Enter</code>, протяни вниз.</li></ol></div>
-<h2>Пример</h2>
-<p><strong>Справочник:</strong> Ручка 25, Тетрадь 40, Карандаш 15.</p>
-<table>
-  <tr><th>Товар</th><th>Кол-во</th><th>Цена</th><th>Стоимость</th></tr>
-  <tr><td>Ручка</td><td>10</td><td><code>=ВПР(D2;$A$2:$B$4;2;ЛОЖЬ)</code> → 25</td><td><code>=E2*F2</code> → 250</td></tr>
-  <tr><td>Тетрадь</td><td>5</td><td>→ 40</td><td>→ 200</td></tr>
-  <tr><td>Карандаш</td><td>20</td><td>→ 15</td><td>→ 300</td></tr>
-  <tr><td><strong>Итого</strong></td><td></td><td></td><td><code>=СУММ(G2:G4)</code> → 750</td></tr>
-</table>
-
-<h2>Задание 6.1</h2>
-<div class="input-row">Цена для D2: <input id="ans61" type="text"> <button onclick="check('ans61','=ВПР(D2;$A$2:$B$4;2;ЛОЖЬ)','res61')">Проверить</button> <span id="res61" class="result"></span></div>
-
-<h2>Задание 6.4. «ВПР по коду» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Справочник: код товара → название. В заказе есть код, нужно подставить название. Запишите формулу.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ВПР(A2;$D$2:$E$10;2;ЛОЖЬ)</code>. Код — в первом столбце справочника, название — во втором.</div></details>
-
-<h2>Задание 6.5. «ВПР с ЕСЛИОШИБКА» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Если товара нет в справочнике, вместо <code>#Н/Д</code> написать «Уточнить». Запишите формулу.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ЕСЛИОШИБКА(ВПР(A2;$D$2:$E$10;2;ЛОЖЬ);"Уточнить")</code>.</div></details>
-
-<h2>Задание 6.6. «Третий столбец» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Справочник: товар, цена, скидка. Нужно подставить скидку (третий столбец). Что изменить в формуле?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Заменить номер столбца: <code>=ВПР(A2;$D$2:$F$10;3;ЛОЖЬ)</code>.</div></details>
-
-<h2>Задание 6.7. «ИНДЕКС+ПОИСКПОЗ» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Перепишите <code>=ВПР(A2;$D$2:$E$10;2;ЛОЖЬ)</code> через <code>ИНДЕКС</code> и <code>ПОИСКПОЗ</code>.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ИНДЕКС($E$2:$E$10;ПОИСКПОЗ(A2;$D$2:$D$10;0))</code>. <code>ПОИСКПОЗ</code> находит номер строки, <code>ИНДЕКС</code> возвращает значение.</div></details>
-
-<h2>Задание 6.8. «Почему #Н/Д?» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">ВПР возвращает <code>#Н/Д</code>, хотя товар точно есть в справочнике. Назовите три возможные причины.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">1. Лишние пробелы в названии. 2. Относительная ссылка на справочник (диапазон «уехал»). 3. Искомое не в первом столбце справочника.</div></details>
-
-<h2>Ловушка</h2>
-<div class="trap"><strong>Почему после протягивания ВПР появляется #Н/Д?</strong> В формуле справочник записан как <code>A2:B4</code> без <code>$</code>. Что произойдёт в строке 3?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Без <code>$</code> диапазон справочника сдвинется вниз: <code>A3:B5</code>, <code>A4:B6</code>… и перестанет совпадать. Нужно <code>$A$2:$B$4</code>.</div></details>
-<div class="prof"><strong>Где это используют:</strong> продавец — подстановка цен, HR — данные по табельному номеру, логист — адреса по клиенту.</div>
-
-<!-- Скрытый шаблон шпаргалки для модуля 6 -->
-<div id="module6-cheat" style="display:none;">
-  <table>
-    <tr><th>Элемент</th><th>Что делает / правило</th><th>Пример</th></tr>
-    <tr><td><code>ВПР</code></td><td>Ищет в первом столбце, возвращает из N-го</td><td><code>=ВПР(D2;$A$2:$B$4;2;ЛОЖЬ)</code></td></tr>
-    <tr><td>Абсолютная ссылка</td><td>Справочник должен быть зафиксирован</td><td><code>$A$2:$B$4</code> — через <code>F4</code></td></tr>
-    <tr><td><code>ЛОЖЬ</code></td><td>Точное совпадение (почти всегда)</td><td>4-й аргумент</td></tr>
-    <tr><td><code>ЕСЛИОШИБКА</code></td><td>Замена <code>#Н/Д</code> на текст</td><td><code>=ЕСЛИОШИБКА(ВПР(...);"Нет в прайсе")</code></td></tr>
-    <tr><td><code>ИНДЕКС+ПОИСКПОЗ</code></td><td>Альтернатива ВПР</td><td><code>=ИНДЕКС($B$2:$B$4;ПОИСКПОЗ(D2;$A$2:$A$4;0))</code></td></tr>
-  </table>
-</div>
-
-<!-- ============ МОДУЛЬ 7 ============ -->
-<div id="module7" class="module" data-cheatsheet="module7-cheat"></div>
-<h1>Модуль 7. Даты</h1>
-<h2>Цель модуля</h2>
-<p>Научиться считать сроки, длительность и дни до дедлайна.</p>
-<h2>Теория</h2>
-<p>Excel хранит даты как числа: 1 = 01.01.1900. Поэтому с датами можно считать.</p>
-<ul>
-  <li><code>=C2-B2</code> — разница в днях (формат результата — число, не дата!).</li>
-  <li><code>=РАЗНДАТ(начало; конец; "d"/"m"/"y")</code> — дни/месяцы/годы.</li>
-  <li><code>=СЕГОДНЯ()</code> — текущая дата, обновляется.</li>
-  <li><code>=ЕСЛИ(C2&lt;СЕГОДНЯ();"Просрочен";"В работе")</code> — статус.</li>
-</ul>
-<h2>Как это делается (пошагово)</h2>
-<div class="steps"><strong>Как получить разницу в днях:</strong><ol><li>Выдели ячейку результата.</li><li>Напиши <code>=C2-B2</code> (из окончания вычитаем начало).</li><li><code>Enter</code>. Если появилась странная дата — смени формат ячейки на «Число».</li></ol></div>
-<h2>Пример</h2>
-<table>
-  <tr><th>Проект</th><th>Начало</th><th>Окончание</th><th>Дней</th><th>Месяцев</th></tr>
-  <tr><td>А</td><td>01.09.2025</td><td>15.09.2025</td><td><code>=C2-B2</code> → 14</td><td><code>=РАЗНДАТ(B2;C2;"m")</code> → 0</td></tr>
-  <tr><td>Б</td><td>10.09.2025</td><td>30.09.2025</td><td>→ 20</td><td>→ 0</td></tr>
-  <tr><td>В</td><td>01.10.2025</td><td>31.12.2025</td><td>→ 91</td><td>→ 2</td></tr>
-</table>
-
-<h2>Задание 7.1</h2>
-<div class="input-row">Разница в днях для проекта А: <input id="ans71" type="text"> <button onclick="check('ans71','=C2-B2','res71')">Проверить</button> <span id="res71" class="result"></span></div>
-<div class="input-row">Месяцев для проекта В: <input id="ans72" type="text"> <button onclick="check('ans72','=РАЗНДАТ(B4;C4;\"m\")','res72')">Проверить</button> <span id="res72" class="result"></span></div>
-
-<h2>Задание 7.3. «Возраст» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Дана дата рождения. Запишите формулу для полного возраста в годах на сегодня.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=РАЗНДАТ(A2;СЕГОДНЯ();"y")</code>.</div></details>
-
-<h2>Задание 7.4. «День недели» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Дана дата. Запишите формулу, которая вернёт день недели (Понедельник, Вторник…).</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ТЕКСТ(A2;"ДДДД")</code> или <code>=ДЕНЬНЕД(A2;2)</code> (вернёт число 1–7).</div></details>
-
-<h2>Задание 7.5. «Прибавить дни» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">К дате <code>01.09.2025</code> прибавить 30 дней. Запишите формулу.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=A2+30</code> → 01.10.2025. Excel хранит даты как числа, поэтому можно прибавлять.</div></details>
-
-<h2>Задание 7.6. «Разница в месяцах» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">С <code>01.01.2025</code> по <code>15.09.2025</code>. Сколько полных месяцев? Запишите формулу.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=РАЗНДАТ(A2;B2;"m")</code> → 8. Полный месяц — с 1-го по 1-е число.</div></details>
-
-<h2>Задание 7.7. «Просрочен ли?» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Если дата окончания раньше сегодняшней — «Да», иначе — «Нет». Запишите формулу.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ЕСЛИ(B2<СЕГОДНЯ();"Да";"Нет")</code>.</div></details>
-
-<h2>Ловушка</h2>
-<div class="trap"><strong>Почему разница дат показывает «14.01.1900»?</strong> Что нужно сделать?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Ячейка имеет формат «Дата». Excel думает, что 14 — это номер дня, и показывает дату. Смени формат на «Число» или «Общий».</div></details>
-<div class="prof"><strong>Где это используют:</strong> менеджер — сроки проектов, HR — стаж, логист — дни доставки.</div>
-
-<!-- Скрытый шаблон шпаргалки для модуля 7 -->
-<div id="module7-cheat" style="display:none;">
-  <table>
-    <tr><th>Функция</th><th>Что делает</th><th>Пример</th></tr>
-    <tr><td>Вычитание</td><td>Разница в днях</td><td><code>=C2-B2</code></td></tr>
-    <tr><td><code>РАЗНДАТ</code></td><td>Разница в днях/месяцах/годах</td><td><code>=РАЗНДАТ(A2;B2;"d")</code></td></tr>
-    <tr><td><code>СЕГОДНЯ</code></td><td>Текущая дата (обновляется)</td><td><code>=СЕГОДНЯ()</code></td></tr>
-    <tr><td>Прибавление</td><td>К дате + N дней</td><td><code>=A2+30</code></td></tr>
-    <tr><td>Статус</td><td>Сравнение даты с сегодня</td><td><code>=ЕСЛИ(C2&lt;СЕГОДНЯ();"Просрочен";"В работе")</code></td></tr>
-    <tr><td>Формат</td><td>Результат вычитания — число, не дата</td><td>Главная → формат «Число»</td></tr>
-  </table>
-</div>
-
-<!-- ============ МОДУЛЬ 8 ============ -->
-<div id="module8" class="module" data-cheatsheet="module8-cheat"></div>
-<h1>Модуль 8. Рейтинг и Топ N</h1>
-<h2>Цель модуля</h2>
-<p>Научиться расставлять значения по местам и находить топ-3.</p>
-<h2>Теория</h2>
-<ul>
-  <li><code>=РАНГ(B2;$B$2:$B$5)</code> — место (1 — максимум). Диапазон абсолютный.</li>
-  <li><code>=НАИБОЛЬШИЙ($B$2:$B$5;1)</code> — k-е сверху.</li>
-  <li><code>=НАИМЕНЬШИЙ(...;1)</code> — k-е снизу.</li>
-</ul>
-<div class="note"><code>РАНГ</code> не сортирует таблицу, только ставит число. При равных — одинаковый ранг, следующий пропускается.</div>
-<h2>Как это делается (пошагово)</h2>
-<div class="steps"><strong>Как выделить топ-3 цветом:</strong><ol><li>Выдели диапазон с продажами.</li><li>Главная → Условное форматирование → Правила отбора первых и последних значений → «Первые 3».</li><li>Выбери цвет заливки → ОК.</li></ol></div>
-<h2>Пример</h2>
-<table>
-  <tr><th>Менеджер</th><th>Продажи</th><th>Ранг</th></tr>
-  <tr><td>Иванов</td><td>1250</td><td><code>=РАНГ(B2;$B$2:$B$5)</code> → 2</td></tr>
-  <tr><td>Петров</td><td>980</td><td>→ 4</td></tr>
-  <tr><td>Сидоров</td><td>1430</td><td>→ 1</td></tr>
-  <tr><td>Кузнецова</td><td>1100</td><td>→ 3</td></tr>
-</table>
-
-<h2>Задание 8.1</h2>
-<div class="input-row">Ранг Иванова: <input id="ans81" type="text"> <button onclick="check('ans81','=РАНГ(B2;$B$2:$B$5)','res81')">Проверить</button> <span id="res81" class="result"></span></div>
-<div class="input-row">Максимум (топ-1): <input id="ans82" type="text"> <button onclick="check('ans82','=НАИБОЛЬШИЙ($B$2:$B$5;1)','res82')">Проверить</button> <span id="res82" class="result"></span></div>
-
-<h2>Задание 8.4. «Ранг по возрастанию» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Значения: <code>45, 12, 78, 23</code>. Расставьте ранги по возрастанию (1 — минимальное). Запишите формулу.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=РАНГ(A2;$A$2:$A$5;1)</code>. Третий аргумент <code>1</code> — по возрастанию.</div></details>
-
-<h2>Задание 8.5. «Топ-3 по возрастанию» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Найдите три наименьших значения. Запишите формулы.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=НАИМЕНЬШИЙ($A$2:$A$10;1)</code>, <code>=НАИМЕНЬШИЙ($A$2:$A$10;2)</code>, <code>=НАИМЕНЬШИЙ($A$2:$A$10;3)</code>.</div></details>
-
-<h2>Задание 8.6. «Ранг и текст» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Менеджер: Иванов, Петров, Сидоров. Продажи: 1250, 980, 1430. Кто на первом месте? Запишите формулу, которая вернёт имя лидера.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content"><code>=ИНДЕКС($A$2:$A$4;ПОИСКПОЗ(НАИБОЛЬШИЙ($B$2:$B$4;1);$B$2:$B$4;0))</code> → Сидоров.</div></details>
-
-<h2>Задание 8.7. «Ранг с равными значениями» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Значения: <code>100, 200, 200, 50</code>. Какие ранги получит каждое? Запишите.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">100 → 3; 200 → 1; 200 → 1; 50 → 4. При равных — одинаковый ранг, следующий пропускается.</div></details>
-
-<h2>Задание 8.8. «Условное форматирование» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
-<div class="task new">Опишите пошагово, как выделить топ-3 значения цветом.</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">1. Выделить диапазон. 2. Главная → Условное форматирование. 3. Правила отбора первых и последних значений → «Первые 3». 4. Выбрать цвет → ОК.</div></details>
-
-<h2>Ловушка</h2>
-<div class="trap"><strong>Почему ранги «съехали»?</strong> Диапазон записан как <code>B2:B5</code> без <code>$</code>. Что будет в строке 3?</div>
-<details class="check"><summary>Показать ответ</summary><div class="content">Диапазон сдвинется: <code>B3:B6</code>, <code>B4:B7</code>… — ранги считаются по разным диапазонам. Нужно <code>$B$2:$B$5</code>.</div></details>
-<div class="prof"><strong>Где это используют:</strong> менеджер — рейтинг продавцов, учитель — рейтинг учеников, аналитик — топ товаров.</div>
-
-<!-- Скрытый шаблон шпаргалки для модуля 8 -->
-<div id="module8-cheat" style="display:none;">
-  <table>
-    <tr><th>Функция</th><th>Что делает</th><th>Пример</th></tr>
-    <tr><td><code>РАНГ</code></td><td>Место в диапазоне (по убыванию)</td><td><code>=РАНГ(A1;$A$1:$A$10)</code></td></tr>
-    <tr><td><code>РАНГ</code> с 3-м аргументом</td><td>Место по возрастанию</td><td><code>=РАНГ(A1;$A$1:$A$10;1)</code></td></tr>
-    <tr><td><code>НАИБОЛЬШИЙ</code></td><td>k-е сверху</td><td><code>=НАИБОЛЬШИЙ(A1:A10;1)</code></td></tr>
-    <tr><td><code>НАИМЕНЬШИЙ</code></td><td>k-е снизу</td><td><code>=НАИМЕНЬШИЙ(A1:A10;1)</code></td></tr>
-    <tr><td>Условное форматирование</td><td>Визуальный топ-3</td><td>Главная → Условное форматирование → Первые 3</td></tr>
-    <tr><td>Правило</td><td>Диапазон всегда абсолютный</td><td><code>$B$2:$B$5</code></td></tr>
-  </table>
-</div>
-
-<!-- ============ ПЛАВАЮЩИЕ ПАНЕЛИ ============ -->
-<!-- Кнопка горячих клавиш (справа) -->
-<button class="floating-btn btn-hotkeys" onclick="toggleHotkeys()" title="Горячие клавиши">⌨️</button>
-
-<!-- Кнопка шпаргалки (слева) -->
-<button class="floating-btn btn-cheatsheet" onclick="toggleCheatsheet()" title="Шпаргалка по текущему модулю">📌</button>
-
-<!-- Панель горячих клавиш -->
-<div class="floating-panel" id="hotkeysPanel">
-  <button class="close-btn" onclick="toggleHotkeys()">×</button>
-  <h3>⌨️ Горячие клавиши</h3>
-  <table>
-    <tr><th>Клавиши</th><th>Действие</th></tr>
-    <tr><td><code>Ctrl+Z</code></td><td>Отменить</td></tr>
-    <tr><td><code>Ctrl+Y</code></td><td>Повторить</td></tr>
-    <tr><td><code>Ctrl+C</code> / <code>Ctrl+V</code></td><td>Копировать / вставить</td></tr>
-    <tr><td><code>Ctrl+X</code></td><td>Вырезать</td></tr>
-    <tr><td><code>F4</code></td><td>Переключить ссылку (<code>$</code>)</td></tr>
-    <tr><td><code>F2</code></td><td>Редактировать ячейку</td></tr>
-    <tr><td><code>Ctrl+Shift+↓</code></td><td>Выделить до конца данных</td></tr>
-    <tr><td><code>Alt+=</code></td><td>Автосумма</td></tr>
-    <tr><td><code>Ctrl+;</code></td><td>Вставить текущую дату</td></tr>
-    <tr><td><code>Ctrl+Shift+;</code></td><td>Вставить текущее время</td></tr>
-    <tr><td><code>Ctrl+Home</code></td><td>В начало листа</td></tr>
-    <tr><td><code>Ctrl+End</code></td><td>В конец данных</td></tr>
-    <tr><td><code>Ctrl+PageUp/PageDown</code></td><td>Переключение листов</td></tr>
-    <tr><td><code>Ctrl+стрелки</code></td><td>Прыжок к краю данных</td></tr>
-    <tr><td><code>Alt+Enter</code></td><td>Новая строка внутри ячейки</td></tr>
-  </table>
-</div>
-
-<!-- Панель шпаргалки (слева) -->
-<div class="floating-panel" id="cheatsheetPanel">
-  <button class="close-btn" onclick="toggleCheatsheet()">×</button>
-  <h3 id="cheatsheetTitle">📌 Шпаргалка</h3>
-  <div id="cheatsheetContent">
-    <p style="color:#777; font-style: italic;">Прокрутите к модулю, чтобы увидеть шпаргалку по текущей теме.</p>
+  <div class="topbar no-print">
+    <button onclick="document.querySelectorAll('details.check').forEach(d => d.open = true)">Показать все
+      проверки</button>
+    <button onclick="document.querySelectorAll('details.check').forEach(d => d.open = false)">Скрыть все</button>
+    <button onclick="window.print()">Печать</button>
   </div>
-</div>
 
-<script>
-function check(inputId, correct, resultId) {
-  const input = document.getElementById(inputId);
-  const result = document.getElementById(resultId);
-  if (!input || !result) return;
-  const val = input.value.trim().replace(/\s+/g, '');
-  const corr = correct.trim().replace(/\s+/g, '');
-  const norm = s => s.toLowerCase().replace(/;/g, ';').replace(/,/g, ';');
-  if (norm(val) === norm(corr)) {
-    result.textContent = '✅ Верно';
-    result.className = 'result ok';
-  } else {
-    result.textContent = '❌ Попробуй ещё';
-    result.className = 'result fail';
-  }
-}
-function checkQuiz() {
-  const key = {q1:'a',q2:'b',q3:'b',q4:'a',q5:'b',q6:'a',q7:'a',q8:'a',q9:'b',q10:'a'};
-  let score = 0;
-  for (let i = 1; i <= 10; i++) {
-    const sel = document.querySelector(`input[name="q${i}"]:checked`);
-    if (sel && sel.value === key['q'+i]) score++;
-  }
-  const res = document.getElementById('quizResult');
-  let text = `Верных ответов: ${score} из 10. `;
-  if (score >= 8) text += 'Отличный старт — можно начинать с модуля 3.';
-  else if (score >= 4) text += 'Начинай с модуля 1.';
-  else text += 'Начинай с модуля 1, иди медленно.';
-  res.textContent = text;
-  res.style.color = score >= 8 ? 'green' : (score >= 4 ? '#b8860b' : '#c0392b');
-}
-function toggleHotkeys() {
-  document.getElementById('hotkeysPanel').classList.toggle('open');
-  // Закрыть шпаргалку, чтобы не перекрывались
-  document.getElementById('cheatsheetPanel').classList.remove('open');
-}
-function toggleCheatsheet() {
-  document.getElementById('cheatsheetPanel').classList.toggle('open');
-  // Закрыть горячие клавиши
-  document.getElementById('hotkeysPanel').classList.remove('open');
-}
+  <div class="title-page">
+    <h1>Курс «Excel с нуля: формулы и расчёты»</h1>
+  </div>
 
-// Автоматическое обновление шпаргалки при прокрутке
-function updateCheatsheet() {
-  const modules = document.querySelectorAll('[data-cheatsheet]');
-  let currentModule = null;
-  const scrollPos = window.scrollY + 200; // отступ от верха
+  <h1>Оглавление</h1>
+  <ol class="toc">
+    <li><a href="#test">Диагностический тест</a></li>
+    <li><a href="#module0">Модуль 0. Знакомство с интерфейсом</a></li>
+    <li><a href="#module1">Модуль 1. Введение в Excel</a></li>
+    <li><a href="#module2">Модуль 2. Формулы и ссылки</a></li>
+    <li><a href="#module3">Модуль 3. СУММ, СРЗНАЧ, ОКРУГЛ</a></li>
+    <li><a href="#module4">Модуль 4. Сумма по условию</a></li>
+    <li><a href="#module5">Модуль 5. Логические функции</a></li>
+    <li><a href="#module6">Модуль 6. Поиск данных: ВПР</a></li>
+    <li><a href="#module7">Модуль 7. Даты</a></li>
+    <li><a href="#module8">Модуль 8. Рейтинг и Топ N</a></li>
+  </ol>
 
-  modules.forEach(mod => {
-    if (mod.offsetTop <= scrollPos) {
-      currentModule = mod;
+  <!-- ============ ДИАГНОСТИЧЕСКИЙ ТЕСТ ============ -->
+  <h1 id="test">Диагностический тест</h1>
+  <p>Ответьте на 10 вопросов до начала курса.</p>
+  <div class="quiz-q">
+    <p><strong>1. Что означает адрес A1?</strong></p>
+    <label><input type="radio" name="q1" value="a"> Ячейка в первом столбце, первой строке</label>
+    <label><input type="radio" name="q1" value="b"> Первая ячейка листа</label>
+    <label><input type="radio" name="q1" value="c"> Столбец A, строка 1, только для чисел</label>
+  </div>
+  <div class="quiz-q">
+    <p><strong>2. С какого знака начинается формула?</strong></p>
+    <label><input type="radio" name="q2" value="a"> С плюса</label>
+    <label><input type="radio" name="q2" value="b"> С равно</label>
+    <label><input type="radio" name="q2" value="c"> С решётки</label>
+  </div>
+  <div class="quiz-q">
+    <p><strong>3. Что делает <code>=СУММ(A1:A5)</code>?</strong></p>
+    <label><input type="radio" name="q3" value="a"> Складывает A1 и A5</label>
+    <label><input type="radio" name="q3" value="b"> Складывает все числа от A1 до A5</label>
+    <label><input type="radio" name="q3" value="c"> Умножает A1 на A5</label>
+  </div>
+  <div class="quiz-q">
+    <p><strong>4. Что означает <code>$A$1</code>?</strong></p>
+    <label><input type="radio" name="q4" value="a"> Абсолютная ссылка</label>
+    <label><input type="radio" name="q4" value="b"> Относительная ссылка</label>
+    <label><input type="radio" name="q4" value="c"> Ошибка</label>
+  </div>
+  <div class="quiz-q">
+    <p><strong>5. Что делает <code>=СРЗНАЧ(B2:B10)</code>?</strong></p>
+    <label><input type="radio" name="q5" value="a"> Сумму</label>
+    <label><input type="radio" name="q5" value="b"> Среднее арифметическое</label>
+    <label><input type="radio" name="q5" value="c"> Количество</label>
+  </div>
+  <div class="quiz-q">
+    <p><strong>6. Что такое <code>#Н/Д</code>?</strong></p>
+    <label><input type="radio" name="q6" value="a"> Ошибка «значение не найдено»</label>
+    <label><input type="radio" name="q6" value="b"> Ошибка деления на ноль</label>
+    <label><input type="radio" name="q6" value="c"> Ошибка имени функции</label>
+  </div>
+  <div class="quiz-q">
+    <p><strong>7. Что делает <code>=ЕСЛИ(A1&gt;0;"Да";"Нет")</code>?</strong></p>
+    <label><input type="radio" name="q7" value="a"> Возвращает «Да», если A1 больше 0, иначе «Нет»</label>
+    <label><input type="radio" name="q7" value="b"> Складывает A1 и 0</label>
+    <label><input type="radio" name="q7" value="c"> Округляет A1</label>
+  </div>
+  <div class="quiz-q">
+    <p><strong>8. Что делает <code>=ВПР(...)</code>?</strong></p>
+    <label><input type="radio" name="q8" value="a"> Ищет значение в справочнике</label>
+    <label><input type="radio" name="q8" value="b"> Считает сумму</label>
+    <label><input type="radio" name="q8" value="c"> Строит диаграмму</label>
+  </div>
+  <div class="quiz-q">
+    <p><strong>9. Как Excel хранит даты?</strong></p>
+    <label><input type="radio" name="q9" value="a"> Как текст</label>
+    <label><input type="radio" name="q9" value="b"> Как числа (дни с 01.01.1900)</label>
+    <label><input type="radio" name="q9" value="c"> Как картинку</label>
+  </div>
+  <div class="quiz-q">
+    <p><strong>10. Что делает <code>=РАНГ(B2;$B$2:$B$5)</code>?</strong></p>
+    <label><input type="radio" name="q10" value="a"> Ставит место значения в диапазоне</label>
+    <label><input type="radio" name="q10" value="b"> Сортирует таблицу</label>
+    <label><input type="radio" name="q10" value="c"> Ищет максимум</label>
+  </div>
+  <button onclick="checkQuiz()"
+    style="padding:8px 16px; border:1px solid #2a6ebb; background:#2a6ebb; color:#fff; border-radius:4px; cursor:pointer; font-size:11pt;">Проверить
+    тест</button>
+  <div id="quizResult" style="margin-top:12px; font-weight:bold;"></div>
+
+  <!-- Защищенный ключ к тесту -->
+  <div style="margin-top: 20px;">
+    <button onclick="showSecretKey()"
+      style="padding:6px 12px; border:1px solid #2e8b57; background:#eef7ee; color:#1f6b3a; border-radius:4px; cursor:pointer; font-size:11pt;">🔒
+      Показать ключ к тесту (для учителя)</button>
+    <div id="secretKeyContent"
+      style="display:none; background: #eef7ee; border-left: 4px solid #2e8b57; padding: 8px 12px; margin: 12px 0; border-radius: 4px;">
+      1 — a, 2 — b, 3 — b, 4 — a, 5 — b, 6 — a, 7 — a, 8 — a, 9 — b, 10 — a.<br>
+      <strong>Интерпретация:</strong> 8–10 — с модуля 3; 4–7 — с модуля 1; 0–3 — с модуля 1, медленно.
+    </div>
+  </div>
+
+  <!-- ============ МОДУЛЬ 0 ============ -->
+  <div id="module0" class="module" data-cheatsheet="module0-cheat"></div>
+  <h1>Модуль 0. Знакомство с интерфейсом</h1>
+  <h2>Цель модуля</h2>
+  <p>Понять, из чего состоит окно программы, чтобы уверенно ориентироваться и не теряться при слове «вкладка» или
+    «лента».</p>
+  <h2>Теория</h2>
+  <p>При первом запуске Excel может показаться, что кнопок слишком много. Но на самом деле интерфейс строго
+    структурирован. Давай разберем основные зоны.</p>
+
+  <h3>Основные элементы экрана</h3>
+  <ul>
+    <li><strong>Строка заголовка</strong> — самый верх. Показывает название твоего документа (например, «Книга1 —
+      Excel»).</li>
+    <li><strong>Лента (Ribbon)</strong> — большая панель с кнопками под заголовком. Она состоит из
+      <strong>вкладок</strong> («Главная», «Вставка», «Формулы» и т.д.). На каждой вкладке сгруппированы кнопки по
+      смыслу.</li>
+    <li><strong>Строка формул</strong> — длинное белое поле с кнопкой <code>fx</code> слева. В нем отображается то, что
+      ты ввел в ячейку. Если там формула, ты увидишь её целиком, даже если в самой ячейке виден только результат.</li>
+    <li><strong>Поле имени</strong> — маленькое окошко слева от строки формул. Показывает адрес выделенной ячейки
+      (например, <code>A1</code>). Туда можно вписать адрес, и Excel мгновенно перепрыгнет на эту ячейку.</li>
+    <li><strong>Рабочая область</strong> — сама сетка из строк и столбцов, где мы вводим данные.</li>
+    <li><strong>Полосы прокрутки</strong> — справа и снизу. Позволяют двигаться по листу, если данных много.</li>
+    <li><strong>Ярлычки листов</strong> — в самом низу слева. Показывают, сколько листов в книге (Лист1, Лист2…). Рядом
+      есть кнопки добавления нового листа <code>+</code>.</li>
+    <li><strong>Строка состояния</strong> — самый низ экрана. Показывает режим работы (Готово, Ввод) и иногда — быстрые
+      вычисления (например, сумму и среднее выделенных чисел).</li>
+  </ul>
+
+  <h3>Вкладки ленты (что где искать)</h3>
+  <ul>
+    <li><strong>Главная</strong> — самое нужное: шрифт, выравнивание, цвет, формат чисел, а также кнопки автосуммы.</li>
+    <li><strong>Вставка</strong> — всё для визуализации: диаграммы, картинки, таблицы.</li>
+    <li><strong>Формулы</strong> — библиотека всех функций, поиск функций.</li>
+    <li><strong>Данные</strong> — сортировка, фильтры, работа с текстом по столбцам.</li>
+    <li><strong>Вид</strong> — закрепление областей (чтобы заголовки не уезжали), линии сетки.</li>
+  </ul>
+
+  <h2>Задание 0.1. «Найди элемент»</h2>
+  <div class="task new">Запусти Excel. Посмотри на экран и попробуй найти:</div>
+  <div class="input-row">1. Как называется вкладка для вставки диаграмм? <input id="ans01" type="text"> <button
+      onclick="check('ans01','Вставка','res01')">Проверить</button> <span id="res01" class="result"></span></div>
+  <div class="input-row">2. В каком поле виден адрес выделенной ячейки? <input id="ans02" type="text"> <button
+      onclick="check('ans02','Поле имени','res02')">Проверить</button> <span id="res02" class="result"></span></div>
+
+  <h2>Задание 0.2. «Быстрый переход»</h2>
+  <div class="task new">Как быстро перейти на ячейку <code>Z100</code>, не прокручивая лист мышкой?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Ввести адрес <code>Z100</code> в <strong>Поле имени</strong> (слева от строки формул) и нажать
+      <code>Enter</code>.</div>
+  </details>
+
+  <h2>Задание 0.3. «Строка состояния»</h2>
+  <div class="task new">Выдели любые три ячейки с числами (например, 10, 20, 30). Посмотри в самый низ экрана (в строку
+    состояния). Что там появилось?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">В строке состояния Excel по умолчанию показывает <strong>Среднее</strong>,
+      <strong>Количество</strong> и <strong>Сумму</strong> выделенных ячеек. Это очень удобно для быстрой проверки.
+    </div>
+  </details>
+
+  <h2>Задание 0.4. «Где спрятались формулы?»</h2>
+  <div class="task new">В ячейку <code>A1</code> ввели формулу <code>=2+2</code>, и нажали Enter. В ячейке отобразилось
+    <code>4</code>. Где можно увидеть саму формулу <code>=2+2</code>?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Выдели ячейку <code>A1</code> и посмотри в <strong>Строку формул</strong> (вверху). Там будет
+      написано <code>=2+2</code>.</div>
+  </details>
+
+  <h2>Задание 0.5. «Секретные кнопки»</h2>
+  <div class="task new">Найди на Ленте (вкладка Главная) кнопку, которая автоматически вставляет сумму в ячейку. Как она
+    называется и на какой клавише есть её быстрый вызов?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Кнопка называется <strong>Автосумма</strong> (значок <code>Σ</code>). Быстрый вызов —
+      комбинация <code>Alt + =</code>.</div>
+  </details>
+
+  <div class="prof"><strong>Где это используют:</strong> уверенное знание интерфейса экономит время. Профессионалы почти
+    не используют мышь, а работают с клавиатуры (горячие клавиши) и быстро переключаются между вкладками.</div>
+
+  <!-- Скрытый шаблон шпаргалки для модуля 0 -->
+  <div id="module0-cheat" style="display:none;">
+    <table>
+      <tr>
+        <th>Элемент</th>
+        <th>Где находится / Зачем нужен</th>
+      </tr>
+      <tr>
+        <td>Лента (Ribbon)</td>
+        <td>Сверху. Вкладки: Главная, Вставка, Формулы...</td>
+      </tr>
+      <tr>
+        <td>Строка формул</td>
+        <td>Сверху, с кнопкой <code>fx</code>. Показывает истинное содержимое</td>
+      </tr>
+      <tr>
+        <td>Поле имени</td>
+        <td>Слева от строки формул. Показывает адрес и позволяет прыгать к ячейкам</td>
+      </tr>
+      <tr>
+        <td>Ярлычки листов</td>
+        <td>Внизу слева. Переключение между страницами</td>
+      </tr>
+      <tr>
+        <td>Строка состояния</td>
+        <td>В самом низу. Показывает сумму/среднее выделенных чисел</td>
+      </tr>
+      <tr>
+        <td>Автосумма</td>
+        <td>Вкладка Главная (значок Σ) или <code>Alt + =</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============ МОДУЛЬ 1 ============ -->
+  <div id="module1" class="module" data-cheatsheet="module1-cheat"></div>
+  <h1>Модуль 1. Введение в Excel</h1>
+  <h2>Цель модуля</h2>
+  <p>Познакомиться с тем, что такое ячейка, диапазон, типы данных, и научиться ссылаться на другие листы.</p>
+  <h2>Теория</h2>
+  <p>Excel — программа для работы с таблицами, но не просто «клеточки». Это вычислительная среда: данные вводятся один
+    раз, а суммы, средние и проценты пересчитываются автоматически.</p>
+  <p><strong>Аналогия:</strong> тетрадь в клетку, где каждая клетка умеет считать.</p>
+
+  <h3>Ключевые понятия</h3>
+  <ul>
+    <li><strong>Книга (Workbook)</strong> — сам файл Excel (расширение `.xlsx`).</li>
+    <li><strong>Лист (Worksheet)</strong> — отдельная страница внутри книги. Внизу есть ярлычки для переключения.</li>
+    <li><strong>Ячейка</strong> — пересечение строки и столбца. У неё есть уникальный адрес: буква столбца + номер
+      строки (например, <code>A1</code>, <code>C15</code>).</li>
+    <li><strong>Диапазон</strong> — группа ячеек. Записывается через двоеточие: <code>A1:A10</code> (весь столбец),
+      <code>A1:D1</code> (строка), <code>A1:C5</code> (прямоугольник).</li>
+  </ul>
+
+  <h3>Типы данных</h3>
+  <p>Excel автоматически определяет тип данных при вводе. От типа зависит, как программа будет с ним работать.</p>
+  <ul>
+    <li><strong>Текст</strong> — буквы, слова. Выравнивается по <strong>левому</strong> краю.</li>
+    <li><strong>Число</strong> — цифры. Выравнивается по <strong>правому</strong> краю. С числами можно делать
+      математические операции.</li>
+    <li><strong>Формула</strong> — начинается со знака <code>=</code>. В ячейке виден результат, а в строке формул —
+      сама формула.</li>
+    <li><strong>Дата и время</strong> — Excel хранит их как числа (количество дней с 01.01.1900).</li>
+  </ul>
+  <div class="note"><strong>Важное правило:</strong> если число выровнено влево — Excel считает его текстом, и в
+    расчётах оно не участвует. Причина — лишние символы (<code>25 руб.</code>, пробел).</div>
+
+  <h3>Ссылки на другие листы (знак «!»)</h3>
+  <p>Если данные находятся на другом листе, в формуле нужно указать его имя и поставить восклицательный знак
+    <code>!</code>.</p>
+  <p><strong>Синтаксис:</strong> <code>ИмяЛиста!АдресЯчейки</code></p>
+  <ul>
+    <li><code>=Лист1!A1</code> — взять значение из ячейки A1 на листе «Лист1».</li>
+  </ul>
+  <div class="note"><strong>Нюанс:</strong> Если в названии листа есть <strong>пробелы</strong> или спецсимволы, его
+    нужно заключать в одинарные кавычки. Например: <code>='Мои продажи'!A1</code>.</div>
+
+  <h3>«Умные таблицы» (Таблицы Excel)</h3>
+  <p>Обычный диапазон данных можно превратить в «умную таблицу». Это дает огромные преимущества:</p>
+  <ul>
+    <li>Формулы автоматически протягиваются на новые строки.</li>
+    <li>Заголовки всегда остаются видимыми при прокрутке.</li>
+  </ul>
+  <div class="steps">
+    <strong>Как создать:</strong>
+    <ol>
+      <li>Выдели любую ячейку внутри твоих данных.</li>
+      <li>Нажми <code>Ctrl + T</code> (или Вставка → Таблица).</li>
+      <li>Убедись, что стоит галочка «Таблица с заголовками», и нажми ОК.</li>
+    </ol>
+  </div>
+
+  <h2>Как это делается (пошагово)</h2>
+  <div class="steps"><strong>Как выделить диапазон:</strong>
+    <ol>
+      <li>Нажми на первую ячейку (например, <code>A1</code>).</li>
+      <li>Зажми левую кнопку мыши и тяни до последней ячейки.</li>
+      <li>Или: выдели <code>A1</code>, зажми <code>Shift</code> и кликни на <code>A10</code>.</li>
+    </ol>
+  </div>
+
+  <h2>Пример</h2>
+  <table>
+    <tr>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+    </tr>
+    <tr>
+      <td>№</td>
+      <td>Фамилия</td>
+      <td>Имя</td>
+      <td>Возраст</td>
+      <td>Рост</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Иванов</td>
+      <td>Петя</td>
+      <td>14</td>
+      <td>160</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Петрова</td>
+      <td>Аня</td>
+      <td>13</td>
+      <td>155</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Сидоров</td>
+      <td>Максим</td>
+      <td>14</td>
+      <td>170</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Кузнецова</td>
+      <td>Маша</td>
+      <td>13</td>
+      <td>158</td>
+    </tr>
+  </table>
+
+  <h2>Задание 1.1. «Первая таблица»</h2>
+  <div class="task">Создайте таблицу «Мои одноклассники» по образцу выше (4 ученика). Проверьте: числа выровнены вправо,
+    текст — влево.</div>
+
+  <h2>Задание 1.2. «Найди адрес»</h2>
+  <div class="task">Запишите адреса:</div>
+  <div class="input-row">1. Возраст Пети: <input id="ans1" type="text"> <button
+      onclick="check('ans1','D2','res1')">Проверить</button> <span id="res1" class="result"></span></div>
+  <div class="input-row">2. Рост Маши: <input id="ans2" type="text"> <button
+      onclick="check('ans2','E5','res2')">Проверить</button> <span id="res2" class="result"></span></div>
+  <div class="input-row">3. Диапазон фамилий: <input id="ans3" type="text"> <button
+      onclick="check('ans3','B2:B5','res3')">Проверить</button> <span id="res3" class="result"></span></div>
+  <div class="input-row">4. Диапазон возрастов: <input id="ans4" type="text"> <button
+      onclick="check('ans4','D2:D5','res4')">Проверить</button> <span id="res4" class="result"></span></div>
+  <details class="check">
+    <summary>Показать проверку</summary>
+    <div class="content"><strong>Ответ:</strong> <code>D2</code>, <code>E5</code>, <code>B2:B5</code>,
+      <code>D2:D5</code>.</div>
+  </details>
+
+  <h2>Задание 1.3. «Адрес и диапазон» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">
+    Дана таблица:
+    <table>
+      <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+        <th>D</th>
+      </tr>
+      <tr>
+        <td>Товар</td>
+        <td>Цена</td>
+        <td>Кол-во</td>
+        <td>Сумма</td>
+      </tr>
+      <tr>
+        <td>Ручка</td>
+        <td>25</td>
+        <td>10</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Тетрадь</td>
+        <td>40</td>
+        <td>5</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Карандаш</td>
+        <td>15</td>
+        <td>20</td>
+        <td></td>
+      </tr>
+    </table>
+    Запишите адреса: 1. Цена тетради. 2. Количество карандашей. 3. Диапазон всех цен. 4. Диапазон всех сумм.
+  </div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>B3</code>, <code>C4</code>, <code>B2:B4</code>, <code>D2:D4</code>.</div>
+  </details>
+
+  <h2>Задание 1.4. «Текст или число?» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Определите, что Excel считает текстом, а что числом:
+    <table>
+      <tr>
+        <th>Запись</th>
+        <th>Текст или число?</th>
+      </tr>
+      <tr>
+        <td>25</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>25 руб.</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>1 250</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>1250,5</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>«100»</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Число; текст (лишние символы); текст (пробел); число; текст (кавычки).</div>
+  </details>
+
+  <h2>Задание 1.5. «Листы книги» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">В книге три листа: «Продажи», «Склад», «Отчёт». Запишите, как обратиться к ячейке
+    <code>B2</code>: 1. На листе «Продажи». 2. На листе «Склад». 3. На листе «Отчёт» (если бы в названии был пробел).
+  </div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>Продажи!B2</code>, <code>Склад!B2</code>, <code>'Отчёт'!B2</code> (одинарные кавычки
+      нужны, если в названии есть пробел, но здесь можно и без).</div>
+  </details>
+
+  <h2>Ловушка</h2>
+  <div class="trap"><strong>Найди ошибку:</strong> в таблице одно число введено как «25 руб.» — оно выровнено влево и не
+    участвует в сумме. Как исправить?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Убрать «руб.» и пробел, оставить только число <code>25</code>. Либо преобразовать через «Данные
+      → Текст по столбцам».</div>
+  </details>
+  <div class="prof"><strong>Где это используют:</strong> учитель — список класса, бухгалтер — список сотрудников,
+    менеджер — список клиентов.</div>
+
+  <!-- Скрытый шаблон шпаргалки для модуля 1 -->
+  <div id="module1-cheat" style="display:none;">
+    <table>
+      <tr>
+        <th>Понятие</th>
+        <th>Пример / Правило</th>
+      </tr>
+      <tr>
+        <td>Адрес ячейки</td>
+        <td><code>A1</code> — столбец + строка</td>
+      </tr>
+      <tr>
+        <td>Диапазон</td>
+        <td><code>A1:A10</code> (столбец), <code>A1:D1</code> (строка), <code>A1:C5</code> (прямоугольник)</td>
+      </tr>
+      <tr>
+        <td>Ссылка на лист</td>
+        <td><code>Лист1!A1</code> или <code>'Мой лист'!A1</code> (с пробелом)</td>
+      </tr>
+      <tr>
+        <td>«Умная таблица»</td>
+        <td><code>Ctrl + T</code> — автопротягивание формул</td>
+      </tr>
+      <tr>
+        <td>Текст / Число</td>
+        <td>Влево / Вправо</td>
+      </tr>
+      <tr>
+        <td>Формула</td>
+        <td>Начинается с <code>=</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============ МОДУЛЬ 2 ============ -->
+  <div id="module2" class="module" data-cheatsheet="module2-cheat"></div>
+  <h1>Модуль 2. Формулы и ссылки</h1>
+  <h2>Цель модуля</h2>
+  <p>Научиться писать формулы, понимать логику вычислений и разницу между относительными и абсолютными ссылками.</p>
+  <h2>Теория</h2>
+  <p><strong>Формула</strong> — это инструкция для Excel. Она всегда начинается со знака <code>=</code>. Если его нет,
+    Excel считает введённое текстом.</p>
+  <p><strong>Главный принцип:</strong> в формулу вставляем адреса ячеек, а не готовые числа. Тогда при изменении данных
+    результат пересчитается автоматически.</p>
+  <p><strong>Операторы:</strong></p>
+  <ul>
+    <li><code>+</code> — сложение</li>
+    <li><code>-</code> — вычитание</li>
+    <li><code>*</code> — умножение</li>
+    <li><code>/</code> — деление</li>
+    <li><code>^</code> — возведение в степень</li>
+    <li><code>%</code> — процент</li>
+  </ul>
+  <p><strong>Приоритет операций:</strong> как в математике (сначала степень, потом умножение/деление, потом
+    сложение/вычитание). Скобки меняют порядок.</p>
+
+  <h3>Типы ссылок</h3>
+  <ul>
+    <li><strong>Относительная</strong> (<code>A1</code>). При копировании формулы вниз или вправо меняется и ссылка.
+      Самый частый вариант.</li>
+    <li><strong>Абсолютная</strong> (<code>$A$1</code>). При копировании ссылка остается на ту же ячейку. Знак
+      <code>$</code> «приклеивает» координату.</li>
+    <li><strong>Смешанная</strong> (<code>$A1</code> или <code>A$1</code>). Фиксируется только столбец или только
+      строка.</li>
+  </ul>
+  <div class="note"><strong>Как быстро поставить <code>$</code>:</strong> в формуле выдели ссылку и нажми
+    <code>F4</code>. Она будет переключаться между 4 режимами: <code>A1</code> → <code>$A$1</code> → <code>A$1</code> →
+    <code>$A1</code>.</div>
+
+  <h2>Как это делается (пошагово)</h2>
+  <div class="steps"><strong>Как протянуть формулу:</strong>
+    <ol>
+      <li>Выдели ячейку с формулой.</li>
+      <li>Наведи курсор на правый нижний угол — появится маленький квадрат (маркер заполнения).</li>
+      <li>Потяни вниз (или двойной клик — до конца данных).</li>
+    </ol>
+  </div>
+
+  <h2>Пример</h2>
+  <p><strong>Калькулятор:</strong></p>
+  <table>
+    <tr>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>5</td>
+      <td><code>=A1+B1</code> → 15</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>4</td>
+      <td><code>=A2*B2</code> → 80</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>8</td>
+      <td><code>=A3/B3</code> → 12,5</td>
+    </tr>
+  </table>
+  <p><strong>Скидка:</strong> <code>B6 = 10%</code></p>
+  <table>
+    <tr>
+      <th>Товар</th>
+      <th>Цена</th>
+      <th>Кол-во</th>
+      <th>Стоимость</th>
+      <th>Со скидкой</th>
+    </tr>
+    <tr>
+      <td>Ручка</td>
+      <td>25</td>
+      <td>10</td>
+      <td><code>=B8*C8</code></td>
+      <td><code>=B8*(1-$B$6)</code></td>
+    </tr>
+    <tr>
+      <td>Тетрадь</td>
+      <td>40</td>
+      <td>5</td>
+      <td><code>=B9*C9</code></td>
+      <td><code>=B9*(1-$B$6)</code></td>
+    </tr>
+    <tr>
+      <td>Карандаш</td>
+      <td>15</td>
+      <td>20</td>
+      <td><code>=B10*C10</code></td>
+      <td><code>=B10*(1-$B$6)</code></td>
+    </tr>
+  </table>
+
+  <h2>Задание 2.1. «Калькулятор»</h2>
+  <div class="input-row">C1 (10+5): <input id="ans21" type="text"> <button
+      onclick="check('ans21','=A1+B1','res21')">Проверить</button> <span id="res21" class="result"></span></div>
+  <div class="input-row">C2 (20*4): <input id="ans22" type="text"> <button
+      onclick="check('ans22','=A2*B2','res22')">Проверить</button> <span id="res22" class="result"></span></div>
+  <div class="input-row">C3 (100/8): <input id="ans23" type="text"> <button
+      onclick="check('ans23','=A3/B3','res23')">Проверить</button> <span id="res23" class="result"></span></div>
+  <details class="check">
+    <summary>Показать проверку</summary>
+    <div class="content"><code>=A1+B1 → 15</code>, <code>=A2*B2 → 80</code>, <code>=A3/B3 → 12,5</code>.</div>
+  </details>
+
+  <h2>Задание 2.2. «Скидка»</h2>
+  <div class="input-row">Формула для E8: <input id="ans24" type="text"> <button
+      onclick="check('ans24','=B8*(1-$B$6)','res24')">Проверить</button> <span id="res24" class="result"></span></div>
+
+  <h2>Задание 2.3. «Найди ошибку»</h2>
+  <table>
+    <tr>
+      <th>Формула</th>
+      <th>Что не так?</th>
+    </tr>
+    <tr>
+      <td><code>=СУММ(A1:A5</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>=A1+B1)</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>A1+B1</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>=СУММ(A1;A5)</code></td>
+      <td></td>
+    </tr>
+  </table>
+  <details class="check">
+    <summary>Показать проверку</summary>
+    <div class="content">1. Не хватает закрывающей скобки. 2. Лишняя скобка. 3. Нет <code>=</code> — это текст. 4.
+      Правильно.</div>
+  </details>
+
+  <h2>Задание 2.4. «Четыре действия» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Даны числа: <code>A1 = 12</code>, <code>B1 = 4</code>. Запишите формулы: 1. Сумма. 2. Разность.
+    3. Произведение. 4. Частное.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=A1+B1</code> → 16; <code>=A1-B1</code> → 8; <code>=A1*B1</code> → 48;
+      <code>=A1/B1</code> → 3.</div>
+  </details>
+
+  <h2>Задание 2.5. «Приоритет операций» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Вычислите вручную, затем проверьте в Excel: 1. <code>=2+3*4</code>. 2. <code>=(2+3)*4</code>. 3.
+    <code>=10-2^2</code>. 4. <code>=10/2+3</code>.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">14; 20; 6; 8. Скобки и степень меняют порядок.</div>
+  </details>
+
+  <h2>Задание 2.6. «Абсолютная ссылка» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">В <code>B1</code> записано <code>100</code> (константа). В <code>A1:A3</code> — числа
+    <code>5, 10, 15</code>. Нужно умножить каждое на <code>B1</code>. Запишите формулу для <code>C1</code>, которую
+    можно протянуть вниз.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=A1*$B$1</code>. Без <code>$</code> при протягивании <code>B1</code> станет
+      <code>B2</code>, <code>B3</code> — пустыми.</div>
+  </details>
+
+  <h2>Ловушка</h2>
+  <div class="trap"><strong>Почему при протягивании <code>=B8*(1-B6)</code> вниз появляется ошибка?</strong> Подсказка:
+    что происходит с <code>B6</code> в строке 9?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Без <code>$</code> ссылка <code>B6</code> при протягивании становится <code>B7</code>,
+      <code>B8</code>… — там нет скидки. Нужно <code>$B$6</code>.</div>
+  </details>
+  <div class="prof"><strong>Где это используют:</strong> продавец — скидки, бухгалтер — налоги, аналитик — проценты
+    роста.</div>
+
+  <!-- Скрытый шаблон шпаргалки для модуля 2 -->
+  <div id="module2-cheat" style="display:none;">
+    <table>
+      <tr>
+        <th>Понятие</th>
+        <th>Пример / Правило</th>
+      </tr>
+      <tr>
+        <td>Формула</td>
+        <td>Всегда начинается с <code>=</code></td>
+      </tr>
+      <tr>
+        <td>Операторы</td>
+        <td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>, <code>%</code></td>
+      </tr>
+      <tr>
+        <td>Приоритет</td>
+        <td>Как в математике, скобки меняют порядок</td>
+      </tr>
+      <tr>
+        <td>Относительная ссылка</td>
+        <td><code>A1</code> — меняется при копировании</td>
+      </tr>
+      <tr>
+        <td>Абсолютная ссылка</td>
+        <td><code>$A$1</code> — не меняется</td>
+      </tr>
+      <tr>
+        <td>Смешанная</td>
+        <td><code>$A1</code> или <code>A$1</code></td>
+      </tr>
+      <tr>
+        <td>Быстрая фиксация</td>
+        <td><code>F4</code> переключает режимы ссылки</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============ МОДУЛЬ 3 ============ -->
+  <div id="module3" class="module" data-cheatsheet="module3-cheat"></div>
+  <h1>Модуль 3. СУММ, СРЗНАЧ, ОКРУГЛ</h1>
+  <h2>Цель модуля</h2>
+  <p>Освоить первые функции: сумма, среднее, округление и минимум/максимум.</p>
+  <h2>Теория</h2>
+  <p><strong>Функция</strong> — это готовая формула с именем. Вместо того чтобы писать <code>=A1+A2+A3+A4+A5</code>, мы
+    пишем <code>=СУММ(A1:A5)</code>.</p>
+  <p><strong>Синтаксис:</strong> <code>=ИМЯ(аргументы)</code>. Аргументы разделяются точкой с запятой <code>;</code> (в
+    русской локали) или запятой <code>,</code> (в английской).</p>
+
+  <h3>Основные функции</h3>
+  <ul>
+    <li><code>=СУММ(C2:C5)</code> — складывает все числа в диапазоне. Текст и пустые ячейки игнорируются.</li>
+    <li><code>=СРЗНАЧ(C2:C5)</code> — вычисляет среднее арифметическое (сумма делится на количество <em>числовых</em>
+      ячеек).</li>
+    <li><code>=ОКРУГЛ(число; количество_знаков)</code> — округляет число. <code>0</code> — до целого, <code>2</code> —
+      два знака после запятой, <code>-1</code> — до десятков.</li>
+    <li><code>=МАКС(C2:C5)</code> и <code>=МИН(C2:C5)</code> — находят наибольшее и наименьшее значение.</li>
+  </ul>
+  <p><strong>Комбинирование:</strong> функции можно вкладывать друг в друга. Например,
+    <code>=ОКРУГЛ(СРЗНАЧ(C2:C5);0)</code> сначала посчитает среднее, а потом округлит его.</p>
+
+  <h2>Как это делается (пошагово)</h2>
+  <div class="steps"><strong>Как вставить функцию:</strong>
+    <ol>
+      <li>Выдели ячейку результата.</li>
+      <li>Начни вводить <code>=</code> и первые буквы имени — Excel подскажет список.</li>
+      <li>Выбери функцию двойным кликом, выдели диапазон мышью, закрой скобку.</li>
+      <li>Нажми <code>Enter</code>.</li>
+    </ol>
+  </div>
+
+  <h2>Пример</h2>
+  <table>
+    <tr>
+      <th>День</th>
+      <th>Товар</th>
+      <th>Сумма</th>
+    </tr>
+    <tr>
+      <td>Пн</td>
+      <td>Ручка</td>
+      <td>1250,456</td>
+    </tr>
+    <tr>
+      <td>Вт</td>
+      <td>Тетрадь</td>
+      <td>980,789</td>
+    </tr>
+    <tr>
+      <td>Ср</td>
+      <td>Карандаш</td>
+      <td>1430,123</td>
+    </tr>
+    <tr>
+      <td>Чт</td>
+      <td>Ручка</td>
+      <td>1100,5</td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <th>Показатель</th>
+      <th>Значение</th>
+    </tr>
+    <tr>
+      <td>Общая сумма</td>
+      <td><code>=СУММ(C2:C5)</code> → 4761,868</td>
+    </tr>
+    <tr>
+      <td>Среднее</td>
+      <td><code>=СРЗНАЧ(C2:C5)</code> → 1190,467</td>
+    </tr>
+    <tr>
+      <td>Среднее округлённое</td>
+      <td><code>=ОКРУГЛ(F3;0)</code> → 1190</td>
+    </tr>
+    <tr>
+      <td>Максимум</td>
+      <td><code>=МАКС(C2:C5)</code> → 1430,123</td>
+    </tr>
+  </table>
+
+  <h2>Задание 3.1. «Продажи за неделю»</h2>
+  <div class="input-row">Сумма: <input id="ans31" type="text"> <button
+      onclick="check('ans31','=СУММ(C2:C5)','res31')">Проверить</button> <span id="res31" class="result"></span></div>
+  <div class="input-row">Среднее: <input id="ans32" type="text"> <button
+      onclick="check('ans32','=СРЗНАЧ(C2:C5)','res32')">Проверить</button> <span id="res32" class="result"></span></div>
+  <div class="input-row">Округлить среднее: <input id="ans33" type="text"> <button
+      onclick="check('ans33','=ОКРУГЛ(F3;0)','res33')">Проверить</button> <span id="res33" class="result"></span></div>
+
+  <h2>Задание 3.2. «Сумма нескольких диапазонов» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Даны два столбца: <code>A1:A3 = 10, 20, 30</code> и <code>C1:C3 = 5, 15, 25</code>. Найдите
+    общую сумму одной формулой.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=СУММ(A1:A3;C1:C3)</code> → 105. Диапазоны перечисляются через <code>;</code>.</div>
+  </details>
+
+  <h2>Задание 3.3. «Округление вверх и вниз» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Число <code>12,345</code>. Запишите формулы: 1. Округлить до 2 знаков. 2. Округлить вверх до
+    целого. 3. Округлить вниз до целого. 4. Отбросить дробную часть.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ОКРУГЛ(12,345;2)</code> → 12,35; <code>=ОКРУГЛВВЕРХ(12,345;0)</code> → 13;
+      <code>=ОКРУГЛВНИЗ(12,345;0)</code> → 12; <code>=ЦЕЛОЕ(12,345)</code> → 12.</div>
+  </details>
+
+  <h2>Задание 3.4. «Среднее без текста» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">В диапазоне <code>A1:A5</code>: <code>10, 20, «нет», 30, 40</code>. Что вернёт
+    <code>=СРЗНАЧ(A1:A5)</code>? А <code>=СУММ(A1:A5)</code>?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>СРЗНАЧ</code> → 25 (делит на 4 числа, текст игнорируется). <code>СУММ</code> → 100.</div>
+  </details>
+
+  <h2>Задание 3.5. «Комбинированная формула» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Найдите среднее значение диапазона <code>B2:B10</code> и округлите до 1 знака после запятой.
+    Запишите одной формулой.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ОКРУГЛ(СРЗНАЧ(B2:B10);1)</code>. Функция внутри функции.</div>
+  </details>
+
+  <h2>Задание 3.6. «Минимум и максимум» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Даны числа: <code>45, 12, 78, 23, 56</code>. Запишите формулы: 1. Максимум. 2. Минимум. 3.
+    Размах (макс − мин).</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=МАКС(A1:A5)</code> → 78; <code>=МИН(A1:A5)</code> → 12;
+      <code>=МАКС(A1:A5)-МИН(A1:A5)</code> → 66.</div>
+  </details>
+
+  <h2>Мини-проект 3. «Калькулятор расходов»</h2>
+  <table>
+    <tr>
+      <th>Статья</th>
+      <th>Сумма</th>
+    </tr>
+    <tr>
+      <td>Продукты</td>
+      <td>4500</td>
+    </tr>
+    <tr>
+      <td>Транспорт</td>
+      <td>1200</td>
+    </tr>
+    <tr>
+      <td>Кафе</td>
+      <td>2300</td>
+    </tr>
+    <tr>
+      <td>Развлечения</td>
+      <td>1800</td>
+    </tr>
+    <tr>
+      <td><strong>Итого</strong></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><strong>Средний расход</strong></td>
+      <td></td>
+    </tr>
+  </table>
+  <details class="check">
+    <summary>Показать проверку</summary>
+    <div class="content">Итого: <code>=СУММ(B2:B5)</code> → 9800. Средний: <code>=СРЗНАЧ(B2:B5)</code> → 2450.</div>
+  </details>
+
+  <h2>Ловушка</h2>
+  <div class="trap"><strong>Почему <code>СРЗНАЧ</code> даёт не то число?</strong> В диапазоне 5 ячеек: 4 числа и 1 текст
+    «нет данных». На что делит Excel?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Excel делит на количество <strong>числовых</strong> ячеек (4), а не на всех (5). Текст
+      игнорируется.</div>
+  </details>
+  <div class="prof"><strong>Где это используют:</strong> бухгалтер — итоги месяца, учитель — средний балл, менеджер —
+    средний чек.</div>
+
+  <!-- Скрытый шаблон шпаргалки для модуля 3 -->
+  <div id="module3-cheat" style="display:none;">
+    <table>
+      <tr>
+        <th>Функция</th>
+        <th>Что делает</th>
+        <th>Пример</th>
+      </tr>
+      <tr>
+        <td><code>СУММ</code></td>
+        <td>Сумма диапазона</td>
+        <td><code>=СУММ(C2:C5)</code></td>
+      </tr>
+      <tr>
+        <td><code>СРЗНАЧ</code></td>
+        <td>Среднее арифметическое</td>
+        <td><code>=СРЗНАЧ(C2:C5)</code></td>
+      </tr>
+      <tr>
+        <td><code>ОКРУГЛ</code></td>
+        <td>Округление до N знаков</td>
+        <td><code>=ОКРУГЛ(A1;2)</code></td>
+      </tr>
+      <tr>
+        <td><code>МАКС</code></td>
+        <td>Максимальное значение</td>
+        <td><code>=МАКС(C2:C5)</code></td>
+      </tr>
+      <tr>
+        <td><code>МИН</code></td>
+        <td>Минимальное значение</td>
+        <td><code>=МИН(C2:C5)</code></td>
+      </tr>
+      <tr>
+        <td>Вложенность</td>
+        <td>Функция внутри функции</td>
+        <td><code>=ОКРУГЛ(СРЗНАЧ(A1:A5);0)</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============ МОДУЛЬ 4 ============ -->
+  <div id="module4" class="module" data-cheatsheet="module4-cheat"></div>
+  <h1>Модуль 4. Сумма по условию</h1>
+  <h2>Цель модуля</h2>
+  <p>Научиться складывать и считать только то, что подходит под заданное условие.</p>
+  <h2>Теория</h2>
+  <p>Обычная <code>СУММ</code> складывает всё подряд. Но часто нужно сложить только определенные данные (например,
+    только продажи конкретного товара). Для этого используются функции с суффиксом «ЕСЛИ».</p>
+
+  <ul>
+    <li><code>=СУММЕСЛИ(диапазон_условия; условие; диапазон_суммирования)</code></li>
+    <li><code>=СЧЁТЕСЛИ(диапазон; условие)</code> — считает <em>количество</em> подходящих ячеек.</li>
+    <li><code>=СРЗНАЧЕСЛИ(...)</code> — считает среднее по условию.</li>
+    <li><code>=СУММЕСЛИМН(диапазон_суммирования; диапазон_условия1; условие1; диапазон_условия2; условие2; ...)</code> —
+      для нескольких условий сразу. <strong>Внимание:</strong> порядок аргументов здесь отличается!</li>
+  </ul>
+
+  <h3>Правила записи условий</h3>
+  <ul>
+    <li>Текст пишется в кавычках: <code>"Ручка"</code>.</li>
+    <li>Знаки сравнения пишутся в кавычках вместе с числом: <code>">1000"</code>.</li>
+    <li>Оператор «не равно»: <code>"<>Ручка"</code>.</li>
+    <li>Ссылка на ячейку пишется без кавычек: <code>D2</code>.</li>
+  </ul>
+
+  <h2>Как это делается (пошагово)</h2>
+  <div class="steps"><strong>Как записать СУММЕСЛИ:</strong>
+    <ol>
+      <li><code>=СУММЕСЛИ(</code></li>
+      <li>Выдели диапазон, где ищем условие (например, <code>B2:B5</code>).</li>
+      <li>Поставь <code>;</code> и напиши условие в кавычках: <code>"Ручка"</code>.</li>
+      <li>Поставь <code>;</code> и выдели диапазон, который складываем (<code>C2:C5</code>).</li>
+      <li>Закрой скобку, <code>Enter</code>.</li>
+    </ol>
+  </div>
+
+  <h2>Пример</h2>
+  <table>
+    <tr>
+      <th>День</th>
+      <th>Товар</th>
+      <th>Сумма</th>
+      <th>Менеджер</th>
+    </tr>
+    <tr>
+      <td>Пн</td>
+      <td>Ручка</td>
+      <td>1250</td>
+      <td>Иванов</td>
+    </tr>
+    <tr>
+      <td>Вт</td>
+      <td>Тетрадь</td>
+      <td>980</td>
+      <td>Петров</td>
+    </tr>
+    <tr>
+      <td>Ср</td>
+      <td>Карандаш</td>
+      <td>1430</td>
+      <td>Иванов</td>
+    </tr>
+    <tr>
+      <td>Чт</td>
+      <td>Ручка</td>
+      <td>1100</td>
+      <td>Петров</td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <th>Показатель</th>
+      <th>Значение</th>
+    </tr>
+    <tr>
+      <td>Сумма «Ручки»</td>
+      <td><code>=СУММЕСЛИ(B2:B5;"Ручка";C2:C5)</code> → 2350</td>
+    </tr>
+    <tr>
+      <td>Кол-во &gt; 1000</td>
+      <td><code>=СЧЁТЕСЛИ(C2:C5;">1000")</code> → 3</td>
+    </tr>
+    <tr>
+      <td>Иванов + Ручка</td>
+      <td><code>=СУММЕСЛИМН(C2:C5;D2:D5;"Иванов";B2:B5;"Ручка")</code> → 1250</td>
+    </tr>
+  </table>
+
+  <h2>Задание 4.1</h2>
+  <div class="input-row">Сумма «Ручки»: <input id="ans41" type="text"> <button
+      onclick="check('ans41','=СУММЕСЛИ(B2:B5;\" Ручка\";C2:C5)','res41')">Проверить</button> <span id="res41"
+      class="result"></span></div>
+  <div class="input-row">Кол-во &gt; 1000: <input id="ans42" type="text"> <button
+      onclick="check('ans42','=СЧЁТЕСЛИ(C2:C5;\">1000\")','res42')">Проверить</button> <span id="res42"
+      class="result"></span></div>
+
+  <h2>Задание 4.3. «Сумма по числовому условию» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Продажи: <code>500, 1200, 800, 1500, 300</code>. Найдите сумму продаж больше 700.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=СУММЕСЛИ(A1:A5;">700")</code> → 3500. Если диапазон условия = диапазон суммирования,
+      третий аргумент можно опустить.</div>
+  </details>
+
+  <h2>Задание 4.4. «Счёт по тексту» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">В столбце <code>B</code> товары: Ручка, Тетрадь, Ручка, Карандаш, Ручка. Сколько раз встречается
+    «Ручка»?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=СЧЁТЕСЛИ(B1:B5;"Ручка")</code> → 3.</div>
+  </details>
+
+  <h2>Задание 4.5. «Среднее по условию» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Оценки: <code>5, 4, 3, 5, 4, 2</code>. Найдите среднее только для оценок ≥4.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=СРЗНАЧЕСЛИ(A1:A6;">=4")</code> → (5+4+5+4)/4 = 4,5.</div>
+  </details>
+
+  <h2>Задание 4.6. «Два условия» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Продажи: товар (Ручка/Тетрадь), менеджер (Иванов/Петров), сумма. Найдите сумму продаж Ручки у
+    Иванова.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=СУММЕСЛИМН(C2:C10;A2:A10;"Ручка";B2:B10;"Иванов")</code>. Сначала диапазон суммирования,
+      потом пары.</div>
+  </details>
+
+  <h2>Задание 4.7. «Не равно» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Найдите сумму всех продаж, кроме товара «Карандаш».</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=СУММЕСЛИ(A2:A10;"<>Карандаш";C2:C10)</code>. Оператор «не равно» —
+      <code>&lt;&gt;</code>.</div>
+  </details>
+
+  <h2>Ловушка</h2>
+  <div class="trap"><strong>Почему <code>СУММЕСЛИ</code> возвращает 0?</strong> Условие записано как <code>Ручка</code>
+    без кавычек. Что не так?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Текст в условии должен быть в кавычках: <code>"Ручка"</code>. Без кавычек Excel ищет ссылку на
+      ячейку с именем «Ручка» и не находит.</div>
+  </details>
+  <div class="prof"><strong>Где это используют:</strong> менеджер — продажи по товару, бухгалтер — расходы по статье,
+    логист — заказы по клиенту.</div>
+
+  <!-- Скрытый шаблон шпаргалки для модуля 4 -->
+  <div id="module4-cheat" style="display:none;">
+    <table>
+      <tr>
+        <th>Функция</th>
+        <th>Что делает</th>
+        <th>Пример</th>
+      </tr>
+      <tr>
+        <td><code>СУММЕСЛИ</code></td>
+        <td>Сумма по одному условию</td>
+        <td><code>=СУММЕСЛИ(B:B;"Ручка";C:C)</code></td>
+      </tr>
+      <tr>
+        <td><code>СЧЁТЕСЛИ</code></td>
+        <td>Количество по условию</td>
+        <td><code>=СЧЁТЕСЛИ(C:C;">1000")</code></td>
+      </tr>
+      <tr>
+        <td><code>СРЗНАЧЕСЛИ</code></td>
+        <td>Среднее по условию</td>
+        <td><code>=СРЗНАЧЕСЛИ(A:A;">=4")</code></td>
+      </tr>
+      <tr>
+        <td><code>СУММЕСЛИМН</code></td>
+        <td>Сумма по нескольким условиям</td>
+        <td><code>=СУММЕСЛИМН(C:C;A:A;"Ручка";B:B;"Иванов")</code></td>
+      </tr>
+      <tr>
+        <td>Порядок аргументов</td>
+        <td>В СУММЕСЛИМН сначала диапазон суммирования</td>
+        <td><code>=СУММЕСЛИМН(что; где1; что1; где2; что2)</code></td>
+      </tr>
+      <tr>
+        <td>Текст в условии</td>
+        <td>Всегда в кавычках</td>
+        <td><code>"Ручка"</code>, <code>">1000"</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============ МОДУЛЬ 5 ============ -->
+  <div id="module5" class="module" data-cheatsheet="module5-cheat"></div>
+  <h1>Модуль 5. Логические функции</h1>
+  <h2>Цель модуля</h2>
+  <p>Научиться ставить оценки и пометки автоматически с помощью условий.</p>
+  <h2>Теория</h2>
+  <p>Логические функции делают таблицу «умной»: программа сама выбирает результат в зависимости от данных.</p>
+  <ul>
+    <li><code>=ЕСЛИ(условие; значение_если_истина; значение_если_ложь)</code></li>
+    <li><strong>Вложенные <code>ЕСЛИ</code></strong> — для выбора из более чем двух вариантов. Excel проверяет их по
+      порядку и останавливается на первом верном.</li>
+    <li><code>И</code> — возвращает ИСТИНА, только если <em>все</em> условия выполнены.</li>
+    <li><code>ИЛИ</code> — возвращает ИСТИНА, если выполнено <em>хотя бы одно</em> условие.</li>
+  </ul>
+  <div class="note">Текст в аргументах всегда пишется в кавычках (<code>"Да"</code>, <code>"Молодец"</code>). Вложенные
+    <code>ЕСЛИ</code> должны идти от самого строгого условия к самому мягкому.</div>
+
+  <h2>Как это делается (пошагово)</h2>
+  <div class="steps"><strong>Как записать вложенное ЕСЛИ:</strong>
+    <ol>
+      <li><code>=ЕСЛИ(</code> условие1 <code>;</code> «результат1» <code>;</code></li>
+      <li>вместо «результат2» снова пишем <code>ЕСЛИ(</code> условие2 <code>;</code> … <code>;</code> … <code>)</code>
+      </li>
+      <li>В конце закрой все скобки — их должно быть столько же, сколько открыто.</li>
+    </ol>
+  </div>
+
+  <h2>Пример</h2>
+  <table>
+    <tr>
+      <th>Ученик</th>
+      <th>Балл</th>
+      <th>Посещаемость</th>
+      <th>Оценка</th>
+      <th>Статус</th>
+    </tr>
+    <tr>
+      <td>Аня</td>
+      <td>85</td>
+      <td>95</td>
+      <td><code>=ЕСЛИ(B2&gt;=80;"5";ЕСЛИ(B2&gt;=60;"4";"3"))</code> → 5</td>
+      <td><code>=ЕСЛИ(И(B2&gt;=80;C2&gt;=90);"Молодец";"—")</code> → Молодец</td>
+    </tr>
+    <tr>
+      <td>Петя</td>
+      <td>72</td>
+      <td>88</td>
+      <td>→ 4</td>
+      <td>→ —</td>
+    </tr>
+    <tr>
+      <td>Маша</td>
+      <td>45</td>
+      <td>70</td>
+      <td>→ 3</td>
+      <td>→ —</td>
+    </tr>
+    <tr>
+      <td>Вова</td>
+      <td>91</td>
+      <td>92</td>
+      <td>→ 5</td>
+      <td>→ Молодец</td>
+    </tr>
+  </table>
+
+  <h2>Задание 5.1</h2>
+  <div class="input-row">Оценка Ани: <input id="ans51" type="text"> <button onclick="check('ans51','=ЕСЛИ(B2>=80;\"
+      5\";ЕСЛИ(B2>=60;\"4\";\"3\"))','res51')">Проверить</button> <span id="res51" class="result"></span></div>
+  <h2>Задание 5.2</h2>
+  <div class="input-row">Статус Ани: <input id="ans52" type="text"> <button
+      onclick="check('ans52','=ЕСЛИ(И(B2>=80;C2>=90);\" Молодец\";\"—\")','res52')">Проверить</button> <span id="res52"
+      class="result"></span></div>
+
+  <h2>Задание 5.4. «Два условия через И» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Сотрудник получает премию, если стаж ≥ 5 лет <strong>и</strong> рейтинг ≥ 4. Запишите формулу
+    для столбца «Премия».</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ЕСЛИ(И(B2>=5;C2>=4);"Да";"Нет")</code>.</div>
+  </details>
+
+  <h2>Задание 5.5. «Условие через ИЛИ» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Товар на распродаже, если цена &lt; 500 <strong>или</strong> скидка &gt; 20%. Запишите формулу.
+  </div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ЕСЛИ(ИЛИ(B2<500;C2>20);"Распродажа";"Обычная")</code>.</div>
+  </details>
+
+  <h2>Задание 5.6. «Три варианта» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Возрастная категория: до 18 — «Ребёнок», 18–60 — «Взрослый», старше 60 — «Пенсионер». Запишите
+    вложенное ЕСЛИ.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ЕСЛИ(A2<18;"Ребёнок";ЕСЛИ(A2<=60;"Взрослый";"Пенсионер"))</code>. Порядок: сначала
+      строгое, потом мягче.</div>
+  </details>
+
+  <h2>Задание 5.7. «ЕСЛИ с текстом» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Если товар «Ручка», написать «Канцелярия», иначе — «Прочее». Запишите формулу.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ЕСЛИ(A2="Ручка";"Канцелярия";"Прочее")</code>. Текст в кавычках.</div>
+  </details>
+
+  <h2>Задание 5.8. «Найди логическую ошибку» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">
+    <pre>=ЕСЛИ(A1>10;"Много";ЕСЛИ(A1>5;"Средне";"Мало"))</pre>Что вернёт при <code>A1 = 7</code>? А при
+    <code>A1 = 12</code>? Есть ли ошибка?
+  </div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">При 7 → «Средне»; при 12 → «Много». Ошибки нет — порядок правильный (сначала строгое &gt;10).
+    </div>
+  </details>
+
+  <h2>Ловушка</h2>
+  <div class="trap"><strong>Почему все получают «4»?</strong> Формула:
+    <code>=ЕСЛИ(B2&gt;=60;"4";ЕСЛИ(B2&gt;=80;"5";"3"))</code>. В чём ошибка?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Условия стоят не по порядку. Сначала проверяется ≥60 — оно истинно для всех, кто ≥60, и до ≥80
+      дело не доходит. Нужно сначала строгое: <code>≥80</code>, потом <code>≥60</code>.</div>
+  </details>
+  <div class="prof"><strong>Где это используют:</strong> учитель — оценки, HR — категории сотрудников, менеджер —
+    статусы заказов.</div>
+
+  <!-- Скрытый шаблон шпаргалки для модуля 5 -->
+  <div id="module5-cheat" style="display:none;">
+    <table>
+      <tr>
+        <th>Функция</th>
+        <th>Что делает</th>
+        <th>Пример</th>
+      </tr>
+      <tr>
+        <td><code>ЕСЛИ</code></td>
+        <td>Проверка условия (2 варианта)</td>
+        <td><code>=ЕСЛИ(A1&gt;0;"Да";"Нет")</code></td>
+      </tr>
+      <tr>
+        <td>Вложенное <code>ЕСЛИ</code></td>
+        <td>Больше двух вариантов</td>
+        <td><code>=ЕСЛИ(B2&gt;=80;"5";ЕСЛИ(B2&gt;=60;"4";"3"))</code></td>
+      </tr>
+      <tr>
+        <td><code>И</code></td>
+        <td>Все условия истинны</td>
+        <td><code>=ЕСЛИ(И(A1&gt;0;B1&lt;5);"Да";"Нет")</code></td>
+      </tr>
+      <tr>
+        <td><code>ИЛИ</code></td>
+        <td>Хотя бы одно истинно</td>
+        <td><code>=ЕСЛИ(ИЛИ(A1&gt;10;B1&lt;2);"Да";"Нет")</code></td>
+      </tr>
+      <tr>
+        <td>Правило</td>
+        <td>Текст всегда в кавычках</td>
+        <td><code>"Молодец"</code>, <code>"—"</code></td>
+      </tr>
+      <tr>
+        <td>Порядок</td>
+        <td>Сначала строгое условие, потом мягче</td>
+        <td><code>&gt;=80</code>, потом <code>&gt;=60</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============ МОДУЛЬ 6 ============ -->
+  <div id="module6" class="module" data-cheatsheet="module6-cheat"></div>
+  <h1>Модуль 6. Поиск данных: ВПР</h1>
+  <h2>Цель модуля</h2>
+  <p>Научиться автоматически подставлять данные из справочника.</p>
+  <h2>Теория</h2>
+  <p>Функция <code>ВПР</code> (вертикальный просмотр) ищет нужное значение в первом столбце таблицы и возвращает
+    значение из указанного столбца этой же строки.</p>
+  <p><code>=ВПР(искомое_значение; таблица; номер_столбца; [ЛОЖЬ])</code></p>
+  <ul>
+    <li><strong>Искомое значение</strong> — то, что мы ищем (должно быть в первом столбце справочника).</li>
+    <li><strong>Таблица</strong> — сам справочник. <strong>Важно:</strong> ссылка должна быть абсолютной
+      (<code>$A$2:$B$4</code>).</li>
+    <li><strong>Номер столбца</strong> — порядковый номер столбца в справочнике (начиная с 1), откуда брать данные.</li>
+    <li><strong>ЛОЖЬ</strong> — означает «точное совпадение». В 99% случаев нужен именно этот аргумент.</li>
+  </ul>
+  <div class="note"><strong>Ошибка <code>#Н/Д</code></strong> — означает «Не Доступно». Excel не нашел искомое значение
+    в справочнике. Чтобы скрыть эту ошибку и заменить её на текст, используют функцию <code>ЕСЛИОШИБКА</code>:
+    <code>=ЕСЛИОШИБКА(ВПР(...);"Нет в прайсе")</code>.</div>
+
+  <h2>Как это делается (пошагово)</h2>
+  <div class="steps"><strong>Как записать ВПР:</strong>
+    <ol>
+      <li><code>=ВПР(</code></li>
+      <li>Кликни на ячейку с искомым значением (например, <code>D2</code>).</li>
+      <li><code>;</code> — выдели справочник и нажми <code>F4</code>, чтобы он стал абсолютным (<code>$A$2:$B$4</code>).
+      </li>
+      <li><code>;</code> — укажи номер столбца, откуда брать результат (<code>2</code>).</li>
+      <li><code>;</code> — напиши <code>ЛОЖЬ</code> (или <code>0</code>) — точное совпадение.</li>
+      <li>Закрой скобку, нажми <code>Enter</code> и протяни вниз.</li>
+    </ol>
+  </div>
+
+  <h2>Пример</h2>
+  <p><strong>Справочник:</strong> Ручка 25, Тетрадь 40, Карандаш 15.</p>
+  <table>
+    <tr>
+      <th>Товар</th>
+      <th>Кол-во</th>
+      <th>Цена</th>
+      <th>Стоимость</th>
+    </tr>
+    <tr>
+      <td>Ручка</td>
+      <td>10</td>
+      <td><code>=ВПР(D2;$A$2:$B$4;2;ЛОЖЬ)</code> → 25</td>
+      <td><code>=E2*F2</code> → 250</td>
+    </tr>
+    <tr>
+      <td>Тетрадь</td>
+      <td>5</td>
+      <td>→ 40</td>
+      <td>→ 200</td>
+    </tr>
+    <tr>
+      <td>Карандаш</td>
+      <td>20</td>
+      <td>→ 15</td>
+      <td>→ 300</td>
+    </tr>
+    <tr>
+      <td><strong>Итого</strong></td>
+      <td></td>
+      <td></td>
+      <td><code>=СУММ(G2:G4)</code> → 750</td>
+    </tr>
+  </table>
+
+  <h2>Задание 6.1</h2>
+  <div class="input-row">Цена для D2: <input id="ans61" type="text"> <button
+      onclick="check('ans61','=ВПР(D2;$A$2:$B$4;2;ЛОЖЬ)','res61')">Проверить</button> <span id="res61"
+      class="result"></span></div>
+
+  <h2>Задание 6.4. «ВПР по коду» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Справочник: код товара → название. В заказе есть код, нужно подставить название. Запишите
+    формулу.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ВПР(A2;$D$2:$E$10;2;ЛОЖЬ)</code>. Код — в первом столбце справочника, название — во
+      втором.</div>
+  </details>
+
+  <h2>Задание 6.5. «ВПР с ЕСЛИОШИБКА» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Если товара нет в справочнике, вместо <code>#Н/Д</code> написать «Уточнить». Запишите формулу.
+  </div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ЕСЛИОШИБКА(ВПР(A2;$D$2:$E$10;2;ЛОЖЬ);"Уточнить")</code>.</div>
+  </details>
+
+  <h2>Задание 6.6. «Третий столбец» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Справочник: товар, цена, скидка. Нужно подставить скидку (третий столбец). Что изменить в
+    формуле?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Заменить номер столбца: <code>=ВПР(A2;$D$2:$F$10;3;ЛОЖЬ)</code>.</div>
+  </details>
+
+  <h2>Задание 6.7. «ИНДЕКС+ПОИСКПОЗ» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Перепишите <code>=ВПР(A2;$D$2:$E$10;2;ЛОЖЬ)</code> через <code>ИНДЕКС</code> и
+    <code>ПОИСКПОЗ</code>.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ИНДЕКС($E$2:$E$10;ПОИСКПОЗ(A2;$D$2:$D$10;0))</code>. <code>ПОИСКПОЗ</code> находит номер
+      строки, <code>ИНДЕКС</code> возвращает значение.</div>
+  </details>
+
+  <h2>Задание 6.8. «Почему #Н/Д?» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">ВПР возвращает <code>#Н/Д</code>, хотя товар точно есть в справочнике. Назовите три возможные
+    причины.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">1. Лишние пробелы в названии. 2. Относительная ссылка на справочник (диапазон «уехал»). 3.
+      Искомое не в первом столбце справочника.</div>
+  </details>
+
+  <h2>Ловушка</h2>
+  <div class="trap"><strong>Почему после протягивания ВПР появляется #Н/Д?</strong> В формуле справочник записан как
+    <code>A2:B4</code> без <code>$</code>. Что произойдёт в строке 3?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Без <code>$</code> диапазон справочника сдвинется вниз: <code>A3:B5</code>, <code>A4:B6</code>…
+      и перестанет совпадать. Нужно <code>$A$2:$B$4</code>.</div>
+  </details>
+  <div class="prof"><strong>Где это используют:</strong> продавец — подстановка цен, HR — данные по табельному номеру,
+    логист — адреса по клиенту.</div>
+
+  <!-- Скрытый шаблон шпаргалки для модуля 6 -->
+  <div id="module6-cheat" style="display:none;">
+    <table>
+      <tr>
+        <th>Элемент</th>
+        <th>Что делает / правило</th>
+        <th>Пример</th>
+      </tr>
+      <tr>
+        <td><code>ВПР</code></td>
+        <td>Ищет в первом столбце, возвращает из N-го</td>
+        <td><code>=ВПР(D2;$A$2:$B$4;2;ЛОЖЬ)</code></td>
+      </tr>
+      <tr>
+        <td>Абсолютная ссылка</td>
+        <td>Справочник должен быть зафиксирован</td>
+        <td><code>$A$2:$B$4</code> — через <code>F4</code></td>
+      </tr>
+      <tr>
+        <td><code>ЛОЖЬ</code></td>
+        <td>Точное совпадение (почти всегда)</td>
+        <td>4-й аргумент</td>
+      </tr>
+      <tr>
+        <td><code>ЕСЛИОШИБКА</code></td>
+        <td>Замена <code>#Н/Д</code> на текст</td>
+        <td><code>=ЕСЛИОШИБКА(ВПР(...);"Нет в прайсе")</code></td>
+      </tr>
+      <tr>
+        <td><code>ИНДЕКС+ПОИСКПОЗ</code></td>
+        <td>Альтернатива ВПР</td>
+        <td><code>=ИНДЕКС($B$2:$B$4;ПОИСКПОЗ(D2;$A$2:$A$4;0))</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============ МОДУЛЬ 7 ============ -->
+  <div id="module7" class="module" data-cheatsheet="module7-cheat"></div>
+  <h1>Модуль 7. Даты</h1>
+  <h2>Цель модуля</h2>
+  <p>Научиться считать сроки, длительность и дни до дедлайна.</p>
+  <h2>Теория</h2>
+  <p>Секрет работы с датами в Excel в том, что <strong>Excel хранит даты как числа</strong>. 1 — это 1 января 1900 года,
+    2 — 2 января, и так далее. Поэтому с датами можно делать математические операции (прибавлять, вычитать).</p>
+  <ul>
+    <li><code>=C2-B2</code> — разница в днях. Результат может отобразиться как дата, тогда нужно сменить формат ячейки
+      на «Число».</li>
+    <li><code>=РАЗНДАТ(начало; конец; "d"/"m"/"y")</code> — вычисляет полные дни (<code>"d"</code>), месяцы
+      (<code>"m"</code>) или годы (<code>"y"</code>) между датами. Это «скрытая» функция, её нет в автоподсказках.</li>
+    <li><code>=СЕГОДНЯ()</code> — вставляет текущую дату (обновляется при каждом открытии файла).</li>
+    <li><code>=ЕСЛИ(C2&lt;СЕГОДНЯ();"Просрочен";"В работе")</code> — сравнение даты с сегодняшним днём.</li>
+  </ul>
+
+  <h2>Как это делается (пошагово)</h2>
+  <div class="steps"><strong>Как получить разницу в днях:</strong>
+    <ol>
+      <li>Выдели ячейку результата.</li>
+      <li>Напиши <code>=C2-B2</code> (из окончания вычитаем начало).</li>
+      <li>Нажми <code>Enter</code>. Если появилась странная дата (например, 14.01.1900), зайди на вкладку «Главная» и
+        смени формат ячейки с «Дата» на «Число».</li>
+    </ol>
+  </div>
+
+  <h2>Пример</h2>
+  <table>
+    <tr>
+      <th>Проект</th>
+      <th>Начало</th>
+      <th>Окончание</th>
+      <th>Дней</th>
+      <th>Месяцев</th>
+    </tr>
+    <tr>
+      <td>А</td>
+      <td>01.09.2025</td>
+      <td>15.09.2025</td>
+      <td><code>=C2-B2</code> → 14</td>
+      <td><code>=РАЗНДАТ(B2;C2;"m")</code> → 0</td>
+    </tr>
+    <tr>
+      <td>Б</td>
+      <td>10.09.2025</td>
+      <td>30.09.2025</td>
+      <td>→ 20</td>
+      <td>→ 0</td>
+    </tr>
+    <tr>
+      <td>В</td>
+      <td>01.10.2025</td>
+      <td>31.12.2025</td>
+      <td>→ 91</td>
+      <td>→ 2</td>
+    </tr>
+  </table>
+
+  <h2>Задание 7.1</h2>
+  <div class="input-row">Разница в днях для проекта А: <input id="ans71" type="text"> <button
+      onclick="check('ans71','=C2-B2','res71')">Проверить</button> <span id="res71" class="result"></span></div>
+  <div class="input-row">Месяцев для проекта В: <input id="ans72" type="text"> <button
+      onclick="check('ans72','=РАЗНДАТ(B4;C4;\" m\")','res72')">Проверить</button> <span id="res72"
+      class="result"></span></div>
+
+  <h2>Задание 7.3. «Возраст» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Дана дата рождения. Запишите формулу для полного возраста в годах на сегодня.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=РАЗНДАТ(A2;СЕГОДНЯ();"y")</code>.</div>
+  </details>
+
+  <h2>Задание 7.4. «День недели» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Дана дата. Запишите формулу, которая вернёт день недели (Понедельник, Вторник…).</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ТЕКСТ(A2;"ДДДД")</code> или <code>=ДЕНЬНЕД(A2;2)</code> (вернёт число 1–7).</div>
+  </details>
+
+  <h2>Задание 7.5. «Прибавить дни» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">К дате <code>01.09.2025</code> прибавить 30 дней. Запишите формулу.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=A2+30</code> → 01.10.2025. Excel хранит даты как числа, поэтому можно прибавлять.</div>
+  </details>
+
+  <h2>Задание 7.6. «Разница в месяцах» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">С <code>01.01.2025</code> по <code>15.09.2025</code>. Сколько полных месяцев? Запишите формулу.
+  </div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=РАЗНДАТ(A2;B2;"m")</code> → 8. Полный месяц — с 1-го по 1-е число.</div>
+  </details>
+
+  <h2>Задание 7.7. «Просрочен ли?» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Если дата окончания раньше сегодняшней — «Да», иначе — «Нет». Запишите формулу.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ЕСЛИ(B2<СЕГОДНЯ();"Да";"Нет")</code>.</div>
+  </details>
+
+  <h2>Ловушка</h2>
+  <div class="trap"><strong>Почему разница дат показывает «14.01.1900»?</strong> Что нужно сделать?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Ячейка имеет формат «Дата». Excel думает, что 14 — это номер дня, и показывает дату. Смени
+      формат на «Число» или «Общий».</div>
+  </details>
+  <div class="prof"><strong>Где это используют:</strong> менеджер — сроки проектов, HR — стаж, логист — дни доставки.
+  </div>
+
+  <!-- Скрытый шаблон шпаргалки для модуля 7 -->
+  <div id="module7-cheat" style="display:none;">
+    <table>
+      <tr>
+        <th>Функция</th>
+        <th>Что делает</th>
+        <th>Пример</th>
+      </tr>
+      <tr>
+        <td>Вычитание</td>
+        <td>Разница в днях</td>
+        <td><code>=C2-B2</code></td>
+      </tr>
+      <tr>
+        <td><code>РАЗНДАТ</code></td>
+        <td>Разница в днях/месяцах/годах</td>
+        <td><code>=РАЗНДАТ(A2;B2;"d")</code></td>
+      </tr>
+      <tr>
+        <td><code>СЕГОДНЯ</code></td>
+        <td>Текущая дата (обновляется)</td>
+        <td><code>=СЕГОДНЯ()</code></td>
+      </tr>
+      <tr>
+        <td>Прибавление</td>
+        <td>К дате + N дней</td>
+        <td><code>=A2+30</code></td>
+      </tr>
+      <tr>
+        <td>Статус</td>
+        <td>Сравнение даты с сегодня</td>
+        <td><code>=ЕСЛИ(C2&lt;СЕГОДНЯ();"Просрочен";"В работе")</code></td>
+      </tr>
+      <tr>
+        <td>Формат</td>
+        <td>Результат вычитания — число, не дата</td>
+        <td>Главная → формат «Число»</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============ МОДУЛЬ 8 ============ -->
+  <div id="module8" class="module" data-cheatsheet="module8-cheat"></div>
+  <h1>Модуль 8. Рейтинг и Топ N</h1>
+  <h2>Цель модуля</h2>
+  <p>Научиться расставлять значения по местам и находить топ-3.</p>
+  <h2>Теория</h2>
+  <p>Когда есть список значений (например, продажи менеджеров), часто нужно определить, кто на первом месте, кто на
+    втором, и найти лучшую тройку.</p>
+  <ul>
+    <li><code>=РАНГ(значение; диапазон; [порядок])</code> — возвращает место значения в диапазоне. По умолчанию (если
+      третий аргумент не указан или равен 0) считается по убыванию (1 — максимум). Если указать <code>1</code>, то по
+      возрастанию (1 — минимум). Диапазон всегда должен быть абсолютным (<code>$B$2:$B$5</code>).</li>
+    <li><code>=НАИБОЛЬШИЙ(диапазон; k)</code> — находит k-е по величине значение.</li>
+    <li><code>=НАИМЕНЬШИЙ(диапазон; k)</code> — находит k-е по величине значение снизу.</li>
+  </ul>
+  <div class="note"><code>РАНГ</code> не сортирует саму таблицу, он только выводит цифру (место) в отдельную ячейку. При
+    одинаковых значениях они получат одинаковый ранг, а следующий ранг пропускается.</div>
+
+  <h2>Как это делается (пошагово)</h2>
+  <div class="steps"><strong>Как выделить топ-3 цветом:</strong>
+    <ol>
+      <li>Выдели диапазон с числами (например, продажи).</li>
+      <li>Главная → Условное форматирование → Правила отбора первых и последних значений → «Первые 3».</li>
+      <li>Выбери цвет заливки → ОК.</li>
+    </ol>
+  </div>
+
+  <h2>Пример</h2>
+  <table>
+    <tr>
+      <th>Менеджер</th>
+      <th>Продажи</th>
+      <th>Ранг</th>
+    </tr>
+    <tr>
+      <td>Иванов</td>
+      <td>1250</td>
+      <td><code>=РАНГ(B2;$B$2:$B$5)</code> → 2</td>
+    </tr>
+    <tr>
+      <td>Петров</td>
+      <td>980</td>
+      <td>→ 4</td>
+    </tr>
+    <tr>
+      <td>Сидоров</td>
+      <td>1430</td>
+      <td>→ 1</td>
+    </tr>
+    <tr>
+      <td>Кузнецова</td>
+      <td>1100</td>
+      <td>→ 3</td>
+    </tr>
+  </table>
+
+  <h2>Задание 8.1</h2>
+  <div class="input-row">Ранг Иванова: <input id="ans81" type="text"> <button
+      onclick="check('ans81','=РАНГ(B2;$B$2:$B$5)','res81')">Проверить</button> <span id="res81" class="result"></span>
+  </div>
+  <div class="input-row">Максимум (топ-1): <input id="ans82" type="text"> <button
+      onclick="check('ans82','=НАИБОЛЬШИЙ($B$2:$B$5;1)','res82')">Проверить</button> <span id="res82"
+      class="result"></span></div>
+
+  <h2>Задание 8.4. «Ранг по возрастанию» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Значения: <code>45, 12, 78, 23</code>. Расставьте ранги по возрастанию (1 — минимальное).
+    Запишите формулу.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=РАНГ(A2;$A$2:$A$5;1)</code>. Третий аргумент <code>1</code> — по возрастанию.</div>
+  </details>
+
+  <h2>Задание 8.5. «Топ-3 по возрастанию» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Найдите три наименьших значения. Запишите формулы.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=НАИМЕНЬШИЙ($A$2:$A$10;1)</code>, <code>=НАИМЕНЬШИЙ($A$2:$A$10;2)</code>,
+      <code>=НАИМЕНЬШИЙ($A$2:$A$10;3)</code>.</div>
+  </details>
+
+  <h2>Задание 8.6. «Ранг и текст» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Менеджер: Иванов, Петров, Сидоров. Продажи: 1250, 980, 1430. Кто на первом месте? Запишите
+    формулу, которая вернёт имя лидера.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content"><code>=ИНДЕКС($A$2:$A$4;ПОИСКПОЗ(НАИБОЛЬШИЙ($B$2:$B$4;1);$B$2:$B$4;0))</code> → Сидоров.</div>
+  </details>
+
+  <h2>Задание 8.7. «Ранг с равными значениями» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Значения: <code>100, 200, 200, 50</code>. Какие ранги получит каждое? Запишите.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">100 → 3; 200 → 1; 200 → 1; 50 → 4. При равных — одинаковый ранг, следующий пропускается.</div>
+  </details>
+
+  <h2>Задание 8.8. «Условное форматирование» <span style="font-size:10pt;color:#7b2fbe;">(новое)</span></h2>
+  <div class="task new">Опишите пошагово, как выделить топ-3 значения цветом.</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">1. Выделить диапазон. 2. Главная → Условное форматирование. 3. Правила отбора первых и
+      последних значений → «Первые 3». 4. Выбрать цвет → ОК.</div>
+  </details>
+
+  <h2>Ловушка</h2>
+  <div class="trap"><strong>Почему ранги «съехали»?</strong> Диапазон записан как <code>B2:B5</code> без <code>$</code>.
+    Что будет в строке 3?</div>
+  <details class="check">
+    <summary>Показать ответ</summary>
+    <div class="content">Диапазон сдвинется: <code>B3:B6</code>, <code>B4:B7</code>… — ранги считаются по разным
+      диапазонам. Нужно <code>$B$2:$B$5</code>.</div>
+  </details>
+  <div class="prof"><strong>Где это используют:</strong> менеджер — рейтинг продавцов, учитель — рейтинг учеников,
+    аналитик — топ товаров.</div>
+
+  <!-- Скрытый шаблон шпаргалки для модуля 8 -->
+  <div id="module8-cheat" style="display:none;">
+    <table>
+      <tr>
+        <th>Функция</th>
+        <th>Что делает</th>
+        <th>Пример</th>
+      </tr>
+      <tr>
+        <td><code>РАНГ</code></td>
+        <td>Место в диапазоне (по убыванию)</td>
+        <td><code>=РАНГ(A1;$A$1:$A$10)</code></td>
+      </tr>
+      <tr>
+        <td><code>РАНГ</code> с 3-м аргументом</td>
+        <td>Место по возрастанию</td>
+        <td><code>=РАНГ(A1;$A$1:$A$10;1)</code></td>
+      </tr>
+      <tr>
+        <td><code>НАИБОЛЬШИЙ</code></td>
+        <td>k-е сверху</td>
+        <td><code>=НАИБОЛЬШИЙ(A1:A10;1)</code></td>
+      </tr>
+      <tr>
+        <td><code>НАИМЕНЬШИЙ</code></td>
+        <td>k-е снизу</td>
+        <td><code>=НАИМЕНЬШИЙ(A1:A10;1)</code></td>
+      </tr>
+      <tr>
+        <td>Условное форматирование</td>
+        <td>Визуальный топ-3</td>
+        <td>Главная → Условное форматирование → Первые 3</td>
+      </tr>
+      <tr>
+        <td>Правило</td>
+        <td>Диапазон всегда абсолютный</td>
+        <td><code>$B$2:$B$5</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ============ ПЛАВАЮЩИЕ ПАНЕЛИ ============ -->
+  <button class="floating-btn btn-hotkeys" onclick="toggleHotkeys()" title="Горячие клавиши">⌨️</button>
+  <button class="floating-btn btn-cheatsheet" onclick="toggleCheatsheet()"
+    title="Шпаргалка по текущему модулю">📌</button>
+
+  <div class="floating-panel" id="hotkeysPanel">
+    <button class="close-btn" onclick="toggleHotkeys()">×</button>
+    <h3>⌨️ Горячие клавиши</h3>
+    <table>
+      <tr>
+        <th>Клавиши</th>
+        <th>Действие</th>
+      </tr>
+      <tr>
+        <td><code>Ctrl+Z</code></td>
+        <td>Отменить</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+Y</code></td>
+        <td>Повторить</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+C</code> / <code>Ctrl+V</code></td>
+        <td>Копировать / вставить</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+X</code></td>
+        <td>Вырезать</td>
+      </tr>
+      <tr>
+        <td><code>F4</code></td>
+        <td>Переключить ссылку (<code>$</code>)</td>
+      </tr>
+      <tr>
+        <td><code>F2</code></td>
+        <td>Редактировать ячейку</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+Shift+↓</code></td>
+        <td>Выделить до конца данных</td>
+      </tr>
+      <tr>
+        <td><code>Alt+=</code></td>
+        <td>Автосумма</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+;</code></td>
+        <td>Вставить текущую дату</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+Shift+;</code></td>
+        <td>Вставить текущее время</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+Home</code></td>
+        <td>В начало листа</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+End</code></td>
+        <td>В конец данных</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+PageUp/PageDown</code></td>
+        <td>Переключение листов</td>
+      </tr>
+      <tr>
+        <td><code>Ctrl+стрелки</code></td>
+        <td>Прыжок к краю данных</td>
+      </tr>
+      <tr>
+        <td><code>Alt+Enter</code></td>
+        <td>Новая строка внутри ячейки</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="floating-panel" id="cheatsheetPanel">
+    <button class="close-btn" onclick="toggleCheatsheet()">×</button>
+    <h3 id="cheatsheetTitle">📌 Шпаргалка</h3>
+    <div id="cheatsheetContent">
+      <p style="color:#777; font-style: italic;">Прокрутите к модулю, чтобы увидеть шпаргалку по текущей теме.</p>
+    </div>
+  </div>
+
+  <script>
+    function check(inputId, correct, resultId) {
+      const input = document.getElementById(inputId);
+      const result = document.getElementById(resultId);
+      if (!input || !result) return;
+      const val = input.value.trim().replace(/\s+/g, '');
+      const corr = correct.trim().replace(/\s+/g, '');
+      const norm = s => s.toLowerCase().replace(/;/g, ';').replace(/,/g, ';');
+      if (norm(val) === norm(corr)) {
+        result.textContent = '✅ Верно';
+        result.className = 'result ok';
+      } else {
+        result.textContent = '❌ Попробуй ещё';
+        result.className = 'result fail';
+      }
     }
-  });
-
-  const title = document.getElementById('cheatsheetTitle');
-  const content = document.getElementById('cheatsheetContent');
-  const panel = document.getElementById('cheatsheetPanel');
-
-  if (currentModule) {
-    const moduleId = currentModule.id;
-    const moduleNum = moduleId.replace('module', '');
-    const cheatId = currentModule.getAttribute('data-cheatsheet');
-    const cheatContent = document.getElementById(cheatId);
-    
-    if (cheatContent) {
-      title.textContent = `📌 Шпаргалка: Модуль ${moduleNum}`;
-      content.innerHTML = cheatContent.innerHTML;
-      // Показать кнопку
-      document.querySelector('.btn-cheatsheet').style.display = 'flex';
+    function checkQuiz() {
+      const key = { q1: 'a', q2: 'b', q3: 'b', q4: 'a', q5: 'b', q6: 'a', q7: 'a', q8: 'a', q9: 'b', q10: 'a' };
+      let score = 0;
+      for (let i = 1; i <= 10; i++) {
+        const sel = document.querySelector(`input[name="q${i}"]:checked`);
+        if (sel && sel.value === key['q' + i]) score++;
+      }
+      const res = document.getElementById('quizResult');
+      let text = `Верных ответов: ${score} из 10. `;
+      if (score >= 8) text += 'Отличный старт — можно начинать с модуля 3.';
+      else if (score >= 4) text += 'Начинай с модуля 1.';
+      else text += 'Начинай с модуля 1, иди медленно.';
+      res.textContent = text;
+      res.style.color = score >= 8 ? 'green' : (score >= 4 ? '#b8860b' : '#c0392b');
     }
-  } else {
-    // Если мы выше первого модуля (например, в тесте) — показываем общую или прячем
-    title.textContent = `📌 Шпаргалка`;
-    content.innerHTML = '<p style="color:#777; font-style: italic;">Шпаргалка появится, когда вы перейдёте к модулю.</p>';
-  }
-}
+    function showSecretKey() {
+      const password = prompt("Введите пароль для просмотра ключа к тесту (только для учителя):");
+      if (password === "1234") {
+        document.getElementById('secretKeyContent').style.display = 'block';
+      } else if (password !== null) {
+        alert("Неверный пароль! Доступ запрещен.");
+      }
+    }
+    function toggleHotkeys() {
+      document.getElementById('hotkeysPanel').classList.toggle('open');
+      document.getElementById('cheatsheetPanel').classList.remove('open');
+    }
+    function toggleCheatsheet() {
+      document.getElementById('cheatsheetPanel').classList.toggle('open');
+      document.getElementById('hotkeysPanel').classList.remove('open');
+    }
 
-// Слушаем скролл
-window.addEventListener('scroll', updateCheatsheet);
-// Инициализация при загрузке
-window.addEventListener('DOMContentLoaded', updateCheatsheet);
-</script>
+    function updateCheatsheet() {
+      const modules = document.querySelectorAll('[data-cheatsheet]');
+      let currentModule = null;
+      const scrollPos = window.scrollY + 200;
+
+      modules.forEach(mod => {
+        if (mod.offsetTop <= scrollPos) {
+          currentModule = mod;
+        }
+      });
+
+      const title = document.getElementById('cheatsheetTitle');
+      const content = document.getElementById('cheatsheetContent');
+      const panel = document.getElementById('cheatsheetPanel');
+
+      if (currentModule) {
+        const moduleId = currentModule.id;
+        const moduleNum = moduleId.replace('module', '');
+        const cheatId = currentModule.getAttribute('data-cheatsheet');
+        const cheatContent = document.getElementById(cheatId);
+
+        if (cheatContent) {
+          title.textContent = `📌 Шпаргалка: Модуль ${moduleNum}`;
+          content.innerHTML = cheatContent.innerHTML;
+          document.querySelector('.btn-cheatsheet').style.display = 'flex';
+        }
+      } else {
+        title.textContent = `📌 Шпаргалка`;
+        content.innerHTML = '<p style="color:#777; font-style: italic;">Шпаргалка появится, когда вы перейдёте к модулю.</p>';
+      }
+    }
+
+    window.addEventListener('scroll', updateCheatsheet);
+    window.addEventListener('DOMContentLoaded', updateCheatsheet);
+  </script>
 
 </body>
+
 </html>
