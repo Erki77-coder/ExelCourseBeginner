@@ -188,33 +188,6 @@
       border-top: 1px dashed #2e8b57;
     }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      background: #fff;
-      padding: 10px;
-      border-bottom: 2px solid #2a6ebb;
-      z-index: 100;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .topbar button {
-      padding: 6px 12px;
-      border: 1px solid #2a6ebb;
-      background: #eef4fb;
-      color: #1a4a8a;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 11pt;
-    }
-
-    .topbar button:hover {
-      background: #2a6ebb;
-      color: #fff;
-    }
-
     .steps {
       background: #f5f0ff;
       border-left: 4px solid #7b2fbe;
@@ -406,7 +379,6 @@
 
     @media print {
 
-      .topbar,
       .floating-btn,
       .floating-panel {
         display: none !important;
@@ -429,15 +401,13 @@
 
 <body>
 
-  <div class="topbar no-print">
-    <button onclick="document.querySelectorAll('details.check').forEach(d => d.open = true)">Показать все
-      проверки</button>
-    <button onclick="document.querySelectorAll('details.check').forEach(d => d.open = false)">Скрыть все</button>
-    <button onclick="window.print()">Печать</button>
-  </div>
-
   <div class="title-page">
     <h1>Курс «Excel с нуля: формулы и расчёты»</h1>
+    <p class="subtitle">Базовый курс для начинающих</p>
+    <p class="subtitle">9 модулей · 9 занятий по 45–60 минут</p>
+    <p class="subtitle">Учебное пособие с теорией, примерами и практическими заданиями</p>
+    <p class="meta">Составитель: ______________________</p>
+    <p class="meta">Год: 2025</p>
   </div>
 
   <h1>Оглавление</h1>
@@ -920,36 +890,68 @@
   <div id="module2" class="module" data-cheatsheet="module2-cheat"></div>
   <h1>Модуль 2. Формулы и ссылки</h1>
   <h2>Цель модуля</h2>
-  <p>Научиться писать формулы, понимать логику вычислений и разницу между относительными и абсолютными ссылками.</p>
+  <p>Понять, как Excel выполняет вычисления, научиться писать формулы и освоить три типа ссылок (относительные,
+    абсолютные и смешанные).</p>
   <h2>Теория</h2>
-  <p><strong>Формула</strong> — это инструкция для Excel. Она всегда начинается со знака <code>=</code>. Если его нет,
-    Excel считает введённое текстом.</p>
-  <p><strong>Главный принцип:</strong> в формулу вставляем адреса ячеек, а не готовые числа. Тогда при изменении данных
-    результат пересчитается автоматически.</p>
-  <p><strong>Операторы:</strong></p>
+  <p><strong>Формула</strong> — это математическое выражение, которое начинается со знака <code>=</code>. Если ты
+    забудешь поставить равно, Excel посчитает твой текст обычной надписью и не будет ничего вычислять.</p>
+  <div class="note"><strong>Золотое правило Excel:</strong> «Что вижу в ячейке — не всегда то, что внутри». В ячейке ты
+    видишь <em>результат</em> (например, число 15). А саму формулу (например, <code>=A1+B1</code>) можно увидеть только
+    в <strong>Строке формул</strong> вверху экрана.</div>
+
+  <h3>Математические операторы</h3>
+  <p>В формулах используются стандартные знаки, но есть пара важных нюансов:</p>
   <ul>
     <li><code>+</code> — сложение</li>
     <li><code>-</code> — вычитание</li>
-    <li><code>*</code> — умножение</li>
-    <li><code>/</code> — деление</li>
-    <li><code>^</code> — возведение в степень</li>
-    <li><code>%</code> — процент</li>
+    <li><code>*</code> — умножение (это звёздочка, а не буква «х»)</li>
+    <li><code>/</code> — деление (это наклонная черта, а не двоеточие)</li>
+    <li><code>^</code> — возведение в степень (например, <code>=2^3</code> это 2 в кубе, результат 8)</li>
+    <li><code>%</code> — процент (если написать <code>=100*10%</code>, Excel посчитает 10% от 100, то есть 10)</li>
   </ul>
-  <p><strong>Приоритет операций:</strong> как в математике (сначала степень, потом умножение/деление, потом
-    сложение/вычитание). Скобки меняют порядок.</p>
 
-  <h3>Типы ссылок</h3>
-  <ul>
-    <li><strong>Относительная</strong> (<code>A1</code>). При копировании формулы вниз или вправо меняется и ссылка.
-      Самый частый вариант.</li>
-    <li><strong>Абсолютная</strong> (<code>$A$1</code>). При копировании ссылка остается на ту же ячейку. Знак
-      <code>$</code> «приклеивает» координату.</li>
-    <li><strong>Смешанная</strong> (<code>$A1</code> или <code>A$1</code>). Фиксируется только столбец или только
-      строка.</li>
-  </ul>
-  <div class="note"><strong>Как быстро поставить <code>$</code>:</strong> в формуле выдели ссылку и нажми
-    <code>F4</code>. Она будет переключаться между 4 режимами: <code>A1</code> → <code>$A$1</code> → <code>A$1</code> →
-    <code>$A1</code>.</div>
+  <h3>Приоритет действий и скобки</h3>
+  <p>Excel считает так же, как и калькулятор: сначала возведение в степень, потом умножение и деление, и только в конце
+    — сложение и вычитание. <strong>Скобки меняют этот порядок.</strong></p>
+  <p>Пример: <code>=2+3*4</code>. Сначала 3*4=12, потом 2+12 = <strong>14</strong>.<br>
+    Пример со скобками: <code>=(2+3)*4</code>. Сначала 2+3=5, потом 5*4 = <strong>20</strong>.</p>
+
+  <h3>Три типа ссылок (самое важное!)</h3>
+  <p>Ссылка — это адрес ячейки в формуле. В Excel есть 3 режима, которые определяют, как ссылка будет вести себя при
+    копировании (или «протягивании») формулы в другие ячейки. Значок <code>$</code> (доллар) — это «клей», который
+    приклеивает координату.</p>
+
+  <table>
+    <tr>
+      <th>Тип ссылки</th>
+      <th>Как выглядит</th>
+      <th>Что происходит при копировании</th>
+    </tr>
+    <tr>
+      <td><strong>Относительная</strong></td>
+      <td><code>A1</code></td>
+      <td>Меняется и столбец, и строка (сдвигается вместе с формулой). <em>Используется в 90% случаев.</em></td>
+    </tr>
+    <tr>
+      <td><strong>Абсолютная</strong></td>
+      <td><code>$A$1</code></td>
+      <td>Не меняется вообще. Формула всегда смотрит на эту конкретную ячейку. <em>Нужна для констант (налог, курс,
+          скидка).</em></td>
+    </tr>
+    <tr>
+      <td><strong>Смешанная</strong></td>
+      <td><code>$A1</code> или <code>A$1</code></td>
+      <td>Фиксируется только одна часть. <code>$A1</code> — столбец зафиксирован, строка меняется. <code>A$1</code> —
+        строка зафиксирована, столбец меняется.</td>
+    </tr>
+  </table>
+
+  <p><strong>Когда нужна смешанная ссылка?</strong> Классический пример — таблица умножения. Если ты пишешь формулу в
+    левом верхнем углу, тебе нужно, чтобы верхняя строка (заголовки) и левый столбец (заголовки) всегда оставались на
+    месте, а перемножались только числа. Для этого фиксируют строку в одном множителе и столбец в другом.</p>
+  <div class="note"><strong>Как быстро поставить <code>$</code>:</strong> напиши в формуле ссылку (например,
+    <code>B6</code>), выдели её мышкой и нажми клавишу <code>F4</code>. Excel будет переключать режимы по кругу:
+    <code>B6</code> → <code>$B$6</code> → <code>B$6</code> → <code>$B6</code>.</div>
 
   <h2>Как это делается (пошагово)</h2>
   <div class="steps"><strong>Как протянуть формулу:</strong>
@@ -984,7 +986,8 @@
       <td><code>=A3/B3</code> → 12,5</td>
     </tr>
   </table>
-  <p><strong>Скидка:</strong> <code>B6 = 10%</code></p>
+  <p><strong>Скидка:</strong> В ячейке <code>B6</code> лежит скидка (10%). Нам нужно посчитать стоимость со скидкой для
+    каждого товара. Формула: <code>=B8*(1-$B$6)</code>.</p>
   <table>
     <tr>
       <th>Товар</th>
@@ -2350,6 +2353,27 @@
         content.innerHTML = '<p style="color:#777; font-style: italic;">Шпаргалка появится, когда вы перейдёте к модулю.</p>';
       }
     }
+
+    // === ЗАЩИТА ВСЕХ ОТВЕТОВ ПАРОЛЕМ ===
+    document.addEventListener('click', function (e) {
+      // Отслеживаем клик по кнопке "Показать ответ" (summary внутри details.check)
+      if (e.target.tagName === 'SUMMARY' && e.target.parentElement.classList.contains('check')) {
+        const details = e.target.parentElement;
+
+        // Если ответ уже открыт, разрешаем закрыть без пароля
+        if (details.hasAttribute('open')) return;
+
+        // Если ответ закрыт, блокируем открытие и запрашиваем пароль
+        e.preventDefault();
+
+        const password = prompt("Введите пароль для просмотра ответов (только для учителя):");
+        if (password === "1234") {
+          details.setAttribute('open', ''); // Открываем
+        } else if (password !== null) {
+          alert("Неверный пароль! Доступ к ответам запрещен.");
+        }
+      }
+    });
 
     window.addEventListener('scroll', updateCheatsheet);
     window.addEventListener('DOMContentLoaded', updateCheatsheet);
